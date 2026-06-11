@@ -9,8 +9,10 @@ Built as a self-directed product + engineering case study around a **Medical Inf
 Pharmacovigilance** intake workflow — the highest-regulated bar, which generalizes back to
 any document class (orders, contracts, complaints).
 
-> **▶ Live demo:** https://review-whisper-fast.lovable.app
-> *(the human-in-the-loop reviewer UI, running on the real agent's output)*
+> **▶ Run the real thing locally** — the reviewer UI in [`lovable-project/`](lovable-project)
+> is bound to the agent's actual output on the 39-case golden set (see [Run it](#run-it),
+> two commands, no API key needed for the UI).
+> *(Hosted UI design preview with sample data: https://review-whisper-fast.lovable.app)*
 
 ---
 
