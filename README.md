@@ -9,10 +9,9 @@ Built as a self-directed product + engineering case study around a **Medical Inf
 Pharmacovigilance** intake workflow — the highest-regulated bar, which generalizes back to
 any document class (orders, contracts, complaints).
 
-> **▶ Run the real thing locally** — the reviewer UI in [`lovable-project/`](lovable-project)
-> is bound to the agent's actual output on the 39-case golden set (see [Run it](#run-it),
-> two commands, no API key needed for the UI).
-> *(Hosted UI design preview with sample data: https://review-whisper-fast.lovable.app)*
+> **▶ Live demo: https://intake-agent-snowy.vercel.app**
+> *The human-in-the-loop reviewer UI, serving the agent's real output on the 39-case golden
+> set — open a case, click a field, and watch it highlight its evidence in the source.*
 
 ---
 
