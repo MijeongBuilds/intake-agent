@@ -1,0 +1,40 @@
+{
+  "model": "claude-sonnet-4-6",
+  "ae_extract_version": "extract_v7",
+  "k": 3,
+  "runs": [
+    {
+      "classification_accuracy": 0.9142857142857143,
+      "terminal_accuracy": 1.0,
+      "ae_recall": 1.0,
+      "auto_approve_precision": 1.0,
+      "metadata_accuracy": 0.9791666666666666,
+      "faithfulness": 1.0,
+      "symptom_coverage": 1.0,
+      "est_usd": 1.5484,
+      "latency_s": 995.1
+    },
+    {
+      "classification_accuracy": 0.9142857142857143,
+      "terminal_accuracy": 1.0,
+      "ae_recall": 1.0,
+      "auto_approve_precision": 1.0,
+      "metadata_accuracy": 0.9791666666666666,
+      "faithfulness": 0.9615384615384616,
+      "symptom_coverage": 1.0,
+      "est_usd": 1.5446,
+      "latency_s": 838.0
+    },
+    {
+      "classification_accuracy": 0.9142857142857143,
+      "terminal_accuracy": 1.0,
+      "ae_recall": 1.0,
+      "auto_approve_precision": 1.0,
+      "metadata_accuracy": 0.9791666666666666,
+      "faithfulness": 0.9615384615384616,
+      "symptom_coverage": 1.0,
+      "est_usd": 1.545,
+      "latency_s": 847.2
+    }
+  ]
+}

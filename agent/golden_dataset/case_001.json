@@ -1,0 +1,54 @@
+{
+  "case_id": "VAULT_EVAL_001",
+  "scenario": "Scenario 1: Clean dosing question (AUTO-APPROVE) — A flawless, digitally native on-label request from a healthcare professional. Demonstrates 'the win' where everything is clear, matches master registries perfectly, and can be committed with zero human intervention.",
+  "input_text": "SOURCE CHANNEL: Web Portal\nSUBMISSION PORTAL REF: portal-inbound-auth-4410\n\nMESSAGE BODY:\nCardioMed Medical Affairs Desk,\n\nI am a staff pharmacist at Boston Medical Center currently verifying an inpatient medical order entry for a patient who has been prescribed your product CholoClear-X.\n\nThe physician's order lists a titration schedule that reaches 100mg daily. However, our internal clinical pharmacy guidelines state that the maximum recommended maintenance amount on the standard product label is 50mg daily. Could your team please confirm the exact approved package insert ceiling guidelines for standard adult hypercholesterolemia administration?\n\nI want to cross-reference our internal database parameters with your official documentation before dispensing the medication to the ward this afternoon.\n\nThank you,\nJonathan Vance, PharmD\nBoston Medical Center Pharmacy Dept\nEmail: jvance@bostonmed.org | Phone: 617-555-0122",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_001",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Web Portal",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-02"
+  },
+  "ground_truth": {
+    "predicted_class": "On-Label Medical Inquiry",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "common_metadata": {
+      "customer_org": "Boston Medical Center",
+      "reporter_name": "Jonathan Vance",
+      "reporter_type": "HCP - Pharmacist",
+      "contact_email": "jvance@bostonmed.org",
+      "contact_phone": "+16175550122",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X"
+    },
+    "on_label_record": {
+      "record_type": "On-Label Inquiry",
+      "target_package_insert_section": "Dosage and Administration",
+      "inquiry_summary_text": "Pharmacist querying the approved maximum adult maintenance titration dosage limits for CholoClear-X.",
+      "suggested_srd_match": "SRD_CHOLO_DOSAGE_ADULT_v2"
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": "NET_HCP_88421",
+      "record_status": "Approved",
+      "routing_target": "Auto-Approve",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "THE WIN: Optimal automation. No clinical safety markers or compliance anomalies, so all 8 gates pass and the record auto-commits as Approved.",
+    "GATE 1 BRANCH: digital-native, so ocr_confidence is null -> Gate 1 passes via the 'no OCR' path ('digital-native (no OCR)'). This is the 55%-native-digital volume. The scanned-clean twin (same text, ocr 0.92 -> the numeric '>=0.90' branch) is case_023.",
+    "TAXONOMY ALIGNMENT: Query is strictly about the approved package insert ceiling ('maximum recommended maintenance amount on the standard product label') -> On-Label Medical Inquiry.",
+    "CATALOG + REGISTRY MATCH: 'CholoClear-X' maps to PROD_CHOLO_MED (catalog.json). Reporter 'Jonathan Vance, PharmD' resolves to NET_HCP_88421 (hcp_registry.json), so Gate 6 passes.",
+    "SRD SUGGESTION: suggested_srd_match = SRD_CHOLO_DOSAGE_ADULT_v2 (srd_library.json). Not gated — a suggested pre-approved answer, not a routing factor.",
+    "NO PILLARS: On-label info query, not a safety event -> the 4 ICSR pillars default to False (unneeded).",
+    "FIXES APPLIED: tenant_id corrected TENANT_BIO_1 -> TENANT_BIO_99 (one-tenant MVP); language normalized 'en' -> 'English' to match case_021."
+  ]
+}

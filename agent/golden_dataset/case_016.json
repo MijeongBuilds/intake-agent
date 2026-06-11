@@ -1,0 +1,56 @@
+{
+  "case_id": "VAULT_EVAL_016",
+  "scenario": "Unknown reporter (Gate 6 → MIS). A clean, confident On-Label contraindication question from a physician who isn't in our HCP registry (newly joined, not yet onboarded). Gate 6 can't resolve her to a system ID → MIS for identity resolution. Clean isolation: everything else passes — confident classification, product in catalog, native text, no AE, in scope.",
+  "input_text": "SOURCE CHANNEL: Web Portal\nSUBMISSION PORTAL REF: portal-medinfo-secure-1109\n\nMESSAGE BODY:\nTo the Medical Affairs Desk,\n\nI am an attending cardiologist who recently joined the Pacific Heart and Vascular Institute in Seattle.\n\nBefore initiating any new patients, I want to confirm the approved label. Per the official package insert for CholoClear-X, is the product contraindicated in patients with active hepatic disease or unexplained persistent elevations of serum transaminases? Please confirm the labeled contraindications.\n\nThank you,\nDr. Evelyn Shaw\nPacific Heart and Vascular Institute\nEmail: e.shaw@pacificheart.org | Phone: 206-555-0191",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_016",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Web Portal",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-08"
+  },
+  "ground_truth": {
+    "predicted_class": "On-Label Medical Inquiry",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "common_metadata": {
+      "customer_org": "Pacific Heart and Vascular Institute",
+      "reporter_name": "Evelyn Shaw",
+      "reporter_type": "HCP - Physician",
+      "contact_email": "e.shaw@pacificheart.org",
+      "contact_phone": "+12065550191",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X",
+      "active_study_flag": false,
+      "study_id": null
+    },
+    "on_label_record": {
+      "record_type": "On-Label Inquiry",
+      "target_package_insert_section": "Contraindications",
+      "inquiry_summary_text": "Physician asks whether CholoClear-X is contraindicated in patients with active hepatic disease or persistently elevated serum transaminases, per the approved package insert.",
+      "suggested_srd_match": "SRD_CHOLO_CONTRA_v1"
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": null,
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": ["Gate 6: HCP link — 'Evelyn Shaw' not in HCP registry"],
+      "day_zero": "2026-06-08",
+      "regulatory_due_date": null,
+      "reporting_regime": null
+    }
+  },
+  "labeling_notes": [
+    "GATE 6 ISOLATION (clean): the ONLY failing gate is Gate 6 — Dr. Evelyn Shaw is a real physician but not (yet) in the HCP registry, so resolve_hcp_link returns null. Confident On-Label classification (~0.97 → Gate 2 passes; margin ~0.85 → Gate 3 passes), product in catalog (Gate 5), native digital (Gate 1), no AE (Gate 4), in scope (Gate 8). MIS is attributable to the unknown reporter alone.",
+    "WHY MIS, NOT AUTO-APPROVE: the system will NOT invent an HCP id or auto-commit under an unverified identity (avoids duplicate/unverified profiles in Vault). It hands the case to MIS to look up the NPI and register her — then future inquiries from her auto-resolve.",
+    "DESIGN A/B WITH case_001: same kind of clean On-Label inquiry, but case_001's reporter (Jonathan Vance) IS registered → Auto-Approve, while this reporter is NOT → MIS via Gate 6. The single variable is registry membership.",
+    "CONFIDENCE SIGNAL: a canonical single-intent question (contraindication) scores high (~0.97), unlike the ambiguous storage/competitor questions (0.62–0.72) — consistent evidence that the confidence gate behaves sensibly."
+  ]
+}

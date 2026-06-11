@@ -1,0 +1,31 @@
+{
+  "case_id": "VAULT_EVAL_044",
+  "scenario": "Adverse Event \u2014 dual-intent: an on-label dosing question that ALSO mentions a reaction (safety override).",
+  "input_text": "SOURCE CHANNEL: Email\n\nHi, quick question on CholoClear-X dosing \u2014 is 50mg still the right maintenance dose for an elderly patient? Also, my patient mentioned she felt dizzy and a bit lightheaded for a couple of hours after her dose yesterday. Probably nothing, but thought I'd mention it.\n\nDr. Carmen Ruiz, MD\nGreenfield Family Practice",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_044",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Adverse Event Report",
+    "adverse_event_flag": true,
+    "out_of_scope": false,
+    "has_patient_pillar": true,
+    "has_reporter_pillar": true,
+    "has_product_pillar": true,
+    "has_event_pillar": true,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "PV Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "Dual intent: an on-label dosing question PLUS a described reaction (dizziness/lightheadedness).",
+    "Safety override (Gate 4): any AE present -> route to PV, regardless of the inquiry."
+  ]
+}

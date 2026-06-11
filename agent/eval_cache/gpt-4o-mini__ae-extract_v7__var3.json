@@ -1,0 +1,40 @@
+{
+  "model": "gpt-4o-mini",
+  "ae_extract_version": "extract_v7",
+  "k": 3,
+  "runs": [
+    {
+      "classification_accuracy": 0.9117647058823529,
+      "terminal_accuracy": 0.9743589743589743,
+      "ae_recall": 1.0,
+      "auto_approve_precision": 0.4,
+      "metadata_accuracy": 0.8863636363636364,
+      "faithfulness": 0.8461538461538461,
+      "symptom_coverage": 1.0,
+      "est_usd": 0.0362,
+      "latency_s": 755.9
+    },
+    {
+      "classification_accuracy": 0.9117647058823529,
+      "terminal_accuracy": 0.9743589743589743,
+      "ae_recall": 1.0,
+      "auto_approve_precision": 0.6,
+      "metadata_accuracy": 0.8863636363636364,
+      "faithfulness": 0.8461538461538461,
+      "symptom_coverage": 1.0,
+      "est_usd": 0.0363,
+      "latency_s": 423.8
+    },
+    {
+      "classification_accuracy": 0.9411764705882353,
+      "terminal_accuracy": 0.9487179487179487,
+      "ae_recall": 1.0,
+      "auto_approve_precision": 0.5,
+      "metadata_accuracy": 0.8863636363636364,
+      "faithfulness": 0.8518518518518519,
+      "symptom_coverage": 1.0,
+      "est_usd": 0.0362,
+      "latency_s": 430.8
+    }
+  ]
+}

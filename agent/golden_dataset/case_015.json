@@ -1,0 +1,53 @@
+{
+  "case_id": "VAULT_EVAL_015",
+  "scenario": "Product not in catalog (Gate 5 → MIS). A clean medical inquiry names a competitor drug (LipidShield-PRO) that isn't in our catalog, so Gate 5 fails and it routes to MIS. Everything else is fine — reporter is a registered HCP, no adverse event.",
+  "input_text": "SOURCE CHANNEL: Web Portal\nSUBMISSION PORTAL REF: web-auth-9912-medinfo\n\nMESSAGE BODY:\nCardioMed Global Medical Information Desk,\n\nI am an outpatient clinic coordinator at Cleveland Clinic reviewing the formulary updates for our cardiovascular risk management programs.\n\nOne of our attending cardiologists submitted an internal request to compare standard initiation dosages for patient transitions. Can your medical team confirm if your master package insert provides a specific protocol for switching a patient directly from a 20mg dose of LipidShield-PRO to your standard maintenance titration arm?\n\nIf you have an approved clinical trial summary or an official consensus statement regarding direct titration equivalence during therapeutic crossover, please forward the documentation to our team as soon as possible.\n\nSincerely,\nOlivia Bennett, BSN, RN\nCleveland Clinic Cardiovascular Center\nEmail: o.bennett@clevelandclinic.org | Phone: 216-555-0188",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_015",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Web Portal",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-08"
+  },
+  "ground_truth": {
+    "predicted_class": "On-Label Medical Inquiry",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "common_metadata": {
+      "customer_org": "Cleveland Clinic Cardiovascular Center",
+      "reporter_name": "Olivia Bennett",
+      "reporter_type": "Nurse",
+      "contact_email": "o.bennett@clevelandclinic.org",
+      "contact_phone": "+12165550188",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "LipidShield-PRO",
+      "active_study_flag": false,
+      "study_id": null
+    },
+    "on_label_record": {
+      "record_type": "On-Label Inquiry",
+      "target_package_insert_section": "Dosage and Administration",
+      "inquiry_summary_text": "Clinic coordinator asks whether the package insert provides a protocol for switching a patient from 20mg LipidShield-PRO to the standard maintenance titration.",
+      "suggested_srd_match": null
+    },
+    "expected_processing": {
+      "catalog_match_result": null,
+      "hcp_system_id": "NET_HCP_44102",
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": ["Gate 2: Classification confidence — ~0.72 < 0.9", "Gate 5: Catalog match — 'LipidShield-PRO' not in active catalog"]
+    }
+  },
+  "labeling_notes": [
+    "GATE 5 TARGET: the only named product is LipidShield-PRO, a competitor drug not in our master catalog -> catalog_match_result is null -> Gate 5 fails -> MIS. This is the catalog-mismatch exception.",
+    "GATE 2 ALSO FIRES (appropriately): the model self-reports ~0.62 confidence here — correctly UNSURE about a competitor-product inquiry — so Gate 2 trips alongside Gate 5. Both legitimately fail -> MIS. (3rd On-Label confidence data point: 0.93 / 0.88 / 0.62. Here low confidence is a feature, not miscalibration.) Reporter is in the registry (Gate 6 passes), native digital (Gate 1), no AE (Gate 4), in scope (Gate 8).",
+    "SRD PRODUCT-MATCH (caught here -> extract_v6): the model first suggested OUR CholoClear-X dosage SRD for the competitor product (topic match, product ignored). Fixed: candidates now show [product] and the prompt requires a product match -> competitor inquiry yields suggested_srd_match = null. CholoClear-X inquiries (case_001/012/023) still resolve their SRD.",
+    "AUTHORING NOTE: reporter_name/type aligned to the model's correct extraction after the first run. Originally named 'Marcus Vance' (Google draft) — renamed to Olivia Bennett to avoid colliding with case_021's consumer reporter in the name-based HCP match."
+  ]
+}

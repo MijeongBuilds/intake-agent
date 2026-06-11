@@ -1,0 +1,56 @@
+{
+  "case_id": "VAULT_EVAL_014",
+  "scenario": "Off-Label inquiry → MIS via compliance policy. A request for data on titrating CholoClear-X to an unapproved 75mg (above the approved 50mg ceiling). The classifier is confident it's Off-Label (~0.95). Off-label inquiries are compliance-sensitive, so an Off-Label POLICY routes them to human review (MIS) and NEVER auto-approves — analogous to the AE→PV override. Exercises the new Off-Label extractor + the Off-Label policy. (Note: originally intended as a Gate-3 conflict case, but the margin is wide ~0.80 — the model commits clearly to Off-Label; see the Gate-3 finding in the notes.)",
+  "input_text": "SOURCE CHANNEL: Web Portal\nSUBMISSION PORTAL REF: portal-inbound-clinical-3321\n\nMESSAGE BODY:\nCardioMed Medical Information Team,\n\nI am currently verifying a titration protocol for an adult patient with severe, refractory hypercholesterolemia.\n\nAccording to section 2.2 of your official CholoClear-X package insert, the maximum approved maintenance dosage ceiling is explicitly capped at 50mg daily. However, our department head wants to implement an aggressive titration step that pushes the patient up to 75mg daily over a 4-week period if target LDL-C levels aren't met.\n\nCould your medical team provide any available clinical trial datasets, pharmacokinetic profiles, or safety clearance documentation regarding adult administrations exceeding the standard 50mg label boundary up to 75mg? We need to establish if this dose adjustment carries an unacceptable risk profile before initiating the ward protocol.\n\nThis is an unsolicited inquiry from our practice.\n\nThank you,\nDr. Keith Sorensen\nMetro Health Cardiovascular Group\nEmail: k.sorensen@metrocardio.org | Phone: 212-555-0199",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_014",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Web Portal",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-08"
+  },
+  "ground_truth": {
+    "predicted_class": "Off-Label Medical Inquiry",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "common_metadata": {
+      "customer_org": "Metro Health Cardiovascular Group",
+      "reporter_name": "Keith Sorensen",
+      "reporter_type": "HCP - Physician",
+      "contact_email": "k.sorensen@metrocardio.org",
+      "contact_phone": "+12125550199",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X",
+      "active_study_flag": false,
+      "study_id": null
+    },
+    "off_label_record": {
+      "record_type": "Off-Label Inquiry",
+      "unapproved_demographic_flag": null,
+      "off_label_indication": "Titration of CholoClear-X to 75mg/day in refractory hypercholesterolemia, above the approved 50mg/day maintenance ceiling",
+      "unsolicited_verification_flag": true
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": "NET_HCP_50817",
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": ["Off-Label policy: off-label inquiries are never auto-approved (compliance) -> MIS"],
+      "day_zero": "2026-06-08",
+      "regulatory_due_date": null,
+      "reporting_regime": null
+    }
+  },
+  "labeling_notes": [
+    "OFF-LABEL POLICY (→ MIS): off-label inquiries are compliance-sensitive — off-label information may only be shared in response to an unsolicited request and via approved channels — so they are NEVER auto-approved. evaluate_gates applies an Off-Label policy (analogous to Gate 4's AE→PV override): predicted_class == Off-Label → MIS, regardless of the other gates. Confident classification (~0.95), product in catalog, reporter registered, native digital, no AE — yet it still routes to MIS by policy.",
+    "OFF-LABEL EXTRACTOR (new, extract_v7): exercises the newly built _extract_off_label() node -> off_label_indication + unsolicited_verification_flag=true (the document explicitly states 'unsolicited'). off_label_indication is a free-text/semantic field. 1st of the not-yet-built record classes implemented via the repeatable 3-step pattern.",
+    "GATE-3 FINDING (why this is NOT a Gate-3 case): originally designed to trip the conflict-margin gate on the approved/unapproved boundary. But both the old self-reported margin AND the new per-class margin come back WIDE (~0.78-0.80) — the model commits clearly to Off-Label. Conclusion: the conflict-margin gate rarely fires because the model commits to a class; a reliable trigger would need calibration on the full set (logprob/per-class scoring + a data-set threshold). Gate 3 is documented as a finding, not forced.",
+    "AUTHORING: renamed the Google draft's 'Keith Vance' -> Keith Sorensen (registered NET_HCP_50817); removed an invented 'inquiry_summary_text' field (not in the OffLabelRecord schema) and the fictional per-class token-probability log."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "case_id": "VAULT_EVAL_026",
+  "scenario": "Non-Serious AE — consumer self-reports mild, transient myalgia on CholoClear-X; no hospitalization, recovered. Routes to PV via Gate 4; 90-day NON-serious clock. Proves Serious-vs-Non-Serious classification and the consumer-reporter path (Gate 6 fails as expected).",
+  "input_text": "SOURCE CHANNEL: Email Inbound Gateway\nPRIMARY DISPATCH LOG: patient-support@cardiomedglobal.com\n\nMESSAGE BODY:\nHello,\n\nI started taking CholoClear-X about a week ago for my cholesterol. I've noticed some mild muscle aches in my legs and shoulders — nothing severe, I haven't seen a doctor or gone to hospital, and the aches mostly went away after a couple of days. I just wanted to let you know in case it's a known side effect. I'm still taking the medication.\n\nThanks,\nDiane Foster\nPersonal email: diane.foster88@gmail.com\nMobile: 503-555-0173",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_026",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-05"
+  },
+  "ground_truth": {
+    "predicted_class": "Adverse Event Report",
+    "adverse_event_flag": true,
+    "out_of_scope": false,
+    "has_patient_pillar": true,
+    "has_reporter_pillar": true,
+    "has_product_pillar": true,
+    "has_event_pillar": true,
+    "common_metadata": {
+      "customer_org": null,
+      "reporter_name": "Diane Foster",
+      "reporter_type": "Consumer",
+      "contact_email": "diane.foster88@gmail.com",
+      "contact_phone": "+15035550173",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X"
+    },
+    "ae_record": {
+      "patient_initials": "D.F.",
+      "patient_age": null,
+      "patient_gender": null,
+      "onset_date": null,
+      "adverse_symptoms_list": ["mild muscle aches in legs", "mild muscle aches in shoulders"],
+      "concomitant_medications_list": [],
+      "ae_seriousness": "Non-Serious",
+      "is_valid_icsr": true
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": null,
+      "record_status": "Pending Review",
+      "routing_target": "PV Queue",
+      "failed_gates": ["Gate 4: Adverse-event policy — AE flag set -> PV (never auto-approve)", "Gate 6: HCP link — consumer reporter not in HCP registry (expected for a consumer)"]
+    }
+  },
+  "labeling_notes": [
+    "NON-SERIOUS: mild, transient myalgia, no hospitalization, self-resolved, no medical intervention -> none of the ICH serious criteria met. This is the counterpart to the Serious cases (008/021/025/028) and exercises the 90-day non-serious reporting clock vs the 15-day serious clock.",
+    "CONSUMER PATH: reporter is the patient (Consumer). Patient is stored as initials only ('D.F.'), never the full name. Gate 6 fails because consumers are not in the HCP registry — expected and not a blocker; Gate 4 still routes the AE to PV.",
+    "COMPLETE ICSR: patient (self), reporter, product, and event are all present -> all four pillars True. Seriousness only affects PV triage urgency, not routing."
+  ]
+}

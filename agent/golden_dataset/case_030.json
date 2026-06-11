@@ -1,0 +1,50 @@
+{
+  "case_id": "VAULT_EVAL_030",
+  "scenario": "Clean On-Label (AUTO-APPROVE) — verified HCP asks a Drug Interactions question about CholoClear-X. All gates pass -> auto-commit. Second clean auto-approve so auto-approve precision is measured on multiple examples.",
+  "input_text": "SOURCE CHANNEL: Web Portal\nSUBMISSION PORTAL REF: portal-inbound-auth-5602\n\nMESSAGE BODY:\nCardioMed Medical Affairs,\n\nOne of my patients on CholoClear-X is about to start a strong CYP3A4 inhibitor. Does the approved prescribing information flag any interaction or dose-adjustment guidance for co-administration with strong CYP3A4 inhibitors?\n\nBest regards,\nAris Thorne, MD, PhD\nSt. Jude Research Hospital\nEmail: athorne@stjude.org | Phone: 901-555-0151",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_030",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Web Portal",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-09"
+  },
+  "ground_truth": {
+    "predicted_class": "On-Label Medical Inquiry",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "common_metadata": {
+      "customer_org": "St. Jude Research Hospital",
+      "reporter_name": "Aris Thorne",
+      "reporter_type": "HCP - Physician",
+      "contact_email": "athorne@stjude.org",
+      "contact_phone": "+19015550151",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X"
+    },
+    "on_label_record": {
+      "record_type": "On-Label Inquiry",
+      "target_package_insert_section": "Drug Interactions",
+      "inquiry_summary_text": "Physician asking whether the approved label flags interactions or dose adjustment for CholoClear-X with strong CYP3A4 inhibitors.",
+      "suggested_srd_match": "SRD_CHOLO_INTERACT_v3"
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": "NET_HCP_77310",
+      "record_status": "Approved",
+      "routing_target": "Auto-Approve",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "AUTO-APPROVE: clean, in-scope, on-label interactions question from a registry-verified physician. Product matches catalog (PROD_CHOLO_MED); reporter resolves to NET_HCP_77310 -> all gates pass -> Approved.",
+    "Targets the Drug Interactions section -> suggested_srd_match SRD_CHOLO_INTERACT_v3. Together with case_029 (Contraindications) and case_001/023 (Dosage), the auto-approve set spans multiple PI sections.",
+    "NO PILLARS (not a safety event). Native-digital -> Gate 1 passes via the no-OCR path."
+  ]
+}

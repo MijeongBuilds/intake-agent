@@ -1,0 +1,55 @@
+{
+  "case_id": "VAULT_EVAL_021",
+  "scenario": "Consumer 'hidden' adverse event (SHOWSTOPPER) — surface intent looks like an FAQ (brochure/coupon request), but a hidden AE dominates. Must classify as AE, not FAQ.",
+  "input_text": "SOURCE CHANNEL: Email Inbound Gateway\nPRIMARY DISPATCH LOG: info-reply@cardiomedglobal.com\n\nMESSAGE BODY:\nHi there,\n\nMy local pharmacy down on 4th street told me to message your support email directly. I was looking through your public corporate website to try and find the downloadable consumer instructions or a patient voucher coupon for your medication CholoClear-X, but I couldn't find the link anywhere on the main page. Can someone send me the direct website link or an online brochure where I can download that?\n\nAlso, while I have you, I wanted to ask if it's normal to get a strange burning sensation in my chest and an irregular, racing heartbeat about an hour after I take the pill? It has happened every morning since I started the new prescription last Thursday, and it makes me feel quite dizzy for a few hours, so I have to sit down at my desk. My doctor is out of town until next week, so I just wanted to read your official patient safety booklet online to see if those are standard issues or if I should stop taking the medication altogether.\n\nThank you for your help,\nMarcus Vance\nHome Address: 542 Applewood Lane, Austin, TX\nPersonal Mobile: 512-555-0144",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_021",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": 1.0,
+    "received_date": "2026-06-02"
+  },
+  "ground_truth": {
+    "predicted_class": "Adverse Event Report",
+    "adverse_event_flag": true,
+    "out_of_scope": false,
+    "has_patient_pillar": true,
+    "has_reporter_pillar": true,
+    "has_product_pillar": true,
+    "has_event_pillar": true,
+    "common_metadata": {
+      "customer_org": null,
+      "reporter_name": "Marcus Vance",
+      "reporter_type": "Consumer",
+      "contact_email": null,
+      "contact_phone": "+15125550144",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X"
+    },
+    "ae_record": {
+      "patient_initials": "M.V.",
+      "patient_age": null,
+      "patient_gender": null,
+      "onset_date": null,
+      "adverse_symptoms_list": ["burning sensation in chest", "irregular racing heartbeat", "dizziness"],
+      "concomitant_medications_list": [],
+      "ae_seriousness": "Serious",
+      "is_valid_icsr": true
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": null,
+      "record_status": "Pending Review",
+      "routing_target": "PV Queue",
+      "failed_gates": ["Gate 3: Conflict margin — top-2 classes within ~0.10 (ambiguous: FAQ surface vs AE)", "Gate 4: Adverse-event policy — AE flag set -> PV (never auto-approve)", "Gate 6: HCP link — consumer reporter not in HCP registry (expected for a consumer)"]
+    }
+  },
+  "labeling_notes": [
+    "SHOWSTOPPER: The email's surface ask is an FAQ (brochure/coupon link). A naive classifier routes this to Public Health/FAQ Deflection. The hidden adverse event (chest burning, irregular racing heartbeat, dizziness) must dominate -> classify as Adverse Event Report, route to PV. Proves AE detection beats surface classification.",
+    "PRIVACY: Reporter is named (Marcus Vance, Consumer). The PATIENT is the same person but must be stored as initials only ('M.V.'), NOT the full name, per HIPAA/GDPR/ICH. contact_email is null (info-reply@cardiomedglobal.com is the COMPANY inbound address, not Marcus's email); only his mobile + home address were given.",
+    "SERIOUSNESS — labeled Serious (calibrated decision; originally a coin-flip). The symptoms (chest burning + irregular racing heartbeat + dizziness) read as a possible cardiac arrhythmia. Under ICH E2A this is defensible as life-threatening (criterion b) or an Important Medical Event. We chose Serious over Non-Serious because: (1) the ICH-E2A-grounded prompt lands here STABLY (5/5 runs) once the vague 'medically important' wording was tightened to the standard IME bar; (2) over-calling seriousness errs in the SAFE direction for PV triage, while under-calling a cardiac signal is the dangerous error; (3) the original label was explicitly flagged 'defensible either way'. NOTE: seriousness only affects urgent-vs-standard PV triage — routing to PV is unchanged either way (Gate 4 flags every AE). See PROGRESS calibration story.",
+    "model_version / prompt_version are intentionally omitted from ground truth — they are runtime fields the system fills when the agent actually processes the case."
+  ]
+}

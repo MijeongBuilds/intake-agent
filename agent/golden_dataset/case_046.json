@@ -1,0 +1,31 @@
+{
+  "case_id": "VAULT_EVAL_046",
+  "scenario": "Adverse Event \u2014 'silent' AE with no clinical keywords (consumer phrasing).",
+  "input_text": "SOURCE CHANNEL: Call Center (transcribed)\n\nCaller: I'm worried about my mom. She started those new cholesterol pills, CholoClear-X, two days ago. Yesterday she took her dose and then just... fell asleep at the kitchen table in the middle of the afternoon, and we could barely wake her. She's never like that. Is that from the medicine?",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_046",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Call Center",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Adverse Event Report",
+    "adverse_event_flag": true,
+    "out_of_scope": false,
+    "has_patient_pillar": true,
+    "has_reporter_pillar": true,
+    "has_product_pillar": true,
+    "has_event_pillar": true,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "PV Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "A serious sedation/altered-consciousness event described in plain words \u2014 no clinical terms ('dizziness', 'syncope').",
+    "Tests AE detection without keyword reliance. Routes to PV."
+  ]
+}

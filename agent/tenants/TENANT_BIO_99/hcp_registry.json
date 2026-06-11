@@ -1,0 +1,16 @@
+{
+  "_note": "HCP registry for this tenant (Gate 6 entity link). Resolve reporter_name -> hcp_system_id. No match -> Gate 6 fails -> MIS. Consumers are NOT here by design. Folder identifies the tenant.",
+  "hcps": [
+    { "hcp_system_id": "NET_HCP_88421", "name": "Jonathan Vance", "credential": "PharmD", "org": "Boston Medical Center", "country": "US", "status": "verified" },
+    { "hcp_system_id": "NET_HCP_55012", "name": "Elena Rostova", "credential": "RN, BSN", "org": "Metro Gardens Clinic", "country": "US", "status": "verified" },
+    { "hcp_system_id": "NET_HCP_77310", "name": "Aris Thorne", "credential": "MD, PhD", "org": "St. Jude Research Hospital", "country": "US", "status": "verified" },
+    { "hcp_system_id": "NET_HCP_29944", "name": "Jean Dupont", "credential": "MD", "org": "Hopital Saint-Louis", "country": "FR", "status": "verified" },
+    { "hcp_system_id": "NET_HCP_61205", "name": "Priya Nair", "credential": "PharmD", "org": "Cleveland Clinic", "country": "US", "status": "verified" },
+    { "hcp_system_id": "NET_HCP_77412", "name": "Samuel Brennan", "credential": "MD, FACC", "org": "St. Jude Heart & Vascular Center", "country": "US", "status": "verified" },
+    { "hcp_system_id": "NET_HCP_33219", "name": "Sarah Jenkins", "credential": "RPh", "org": "St. Jude Clinical Pharmacy", "country": "US", "status": "verified" },
+    { "hcp_system_id": "NET_HCP_44102", "name": "Olivia Bennett", "credential": "RN, BSN", "org": "Cleveland Clinic Cardiovascular Center", "country": "US", "status": "verified" },
+    { "hcp_system_id": "NET_HCP_50817", "name": "Keith Sorensen", "credential": "MD", "org": "Metro Health Cardiovascular Group", "country": "US", "status": "verified" },
+    { "hcp_system_id": "NET_HCP_62890", "name": "Nathan Cole", "credential": "MD", "org": "Riverside Hepatology Associates", "country": "US", "status": "verified" },
+    { "hcp_system_id": "NET_HCP_71558", "name": "Maria Santos", "credential": "MD, FACC", "org": "Lakeside Cardiology Institute", "country": "US", "status": "verified" }
+  ]
+}

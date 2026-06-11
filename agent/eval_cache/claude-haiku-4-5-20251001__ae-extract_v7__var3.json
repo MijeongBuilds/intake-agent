@@ -1,0 +1,40 @@
+{
+  "model": "claude-haiku-4-5-20251001",
+  "ae_extract_version": "extract_v7",
+  "k": 3,
+  "runs": [
+    {
+      "classification_accuracy": 0.9117647058823529,
+      "terminal_accuracy": 0.9743589743589743,
+      "ae_recall": 1.0,
+      "auto_approve_precision": 1.0,
+      "metadata_accuracy": 0.9545454545454546,
+      "faithfulness": 0.76,
+      "symptom_coverage": 0.8571428571428571,
+      "est_usd": 0.5033,
+      "latency_s": 491.4
+    },
+    {
+      "classification_accuracy": 0.96875,
+      "terminal_accuracy": 1.0,
+      "ae_recall": 1.0,
+      "auto_approve_precision": 1.0,
+      "metadata_accuracy": 0.9583333333333334,
+      "faithfulness": 0.7692307692307693,
+      "symptom_coverage": 0.8888888888888888,
+      "est_usd": 0.5206,
+      "latency_s": 484.5
+    },
+    {
+      "classification_accuracy": 0.9428571428571428,
+      "terminal_accuracy": 1.0,
+      "ae_recall": 1.0,
+      "auto_approve_precision": 1.0,
+      "metadata_accuracy": 0.9583333333333334,
+      "faithfulness": 0.8148148148148148,
+      "symptom_coverage": 0.8888888888888888,
+      "est_usd": 0.5335,
+      "latency_s": 488.5
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "case_id": "VAULT_EVAL_018",
+  "scenario": "Pure spam / out-of-scope (Gate 8 → MIS). A marketing solicitation that name-drops CholoClear-X but contains no medical question. The classifier scores EVERY class ~0 and sets out_of_scope=True → Gate 8 fails → MIS (the junk-cleanup path). Proves the system won't build a case record just because a product name appears. Note: Gate 8 co-fires Gate 2 (an out-of-scope doc fits no class, so confidence ~0.05) and Gate 6 (no real reporter) — it can't be isolated, but out_of_scope is the interpretable 'spam' flag.",
+  "input_text": "SOURCE CHANNEL: Web Portal\nSUBMISSION PORTAL REF: portal-public-anon-0092\n\nMESSAGE BODY:\nATTENTION: CHIEF PROCUREMENT OFFICER & MEDICAL OPERATIONS DIRECTOR\n\nAre your clinical groups spending thousands too much every quarter on outdated pharmacy analytics software and manual patient charting trackers?\n\nOur team at Enterprise Health Solutions LLC just launched MedAI-Track v4.0, a premier cloud platform optimized for tracking tier-1 blockbusters like CholoClear-X and other leading lipid-lowering assets. We guarantee our automated dashboards reduce your data compilation overhead by up to 35% within thirty days.\n\nClick below to access our executive whitepaper and arrange a mandatory 15-minute presentation with our regional sales VP this week. Act now to lock in our Q2 volume discount pricing!\n\nThis is a commercial announcement. To remove your address from our marketing list, reply UNSUBSCRIBE.",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_018",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Web Portal",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": 1.0,
+    "received_date": "2026-06-08"
+  },
+  "ground_truth": {
+    "predicted_class": "Out of scope",
+    "adverse_event_flag": false,
+    "out_of_scope": true,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "common_metadata": {
+      "customer_org": "Enterprise Health Solutions LLC",
+      "reporter_name": "<UNKNOWN>",
+      "reporter_type": "Other",
+      "contact_email": null,
+      "contact_phone": null,
+      "country_code": "<UNKNOWN>",
+      "language": "English",
+      "product_mentioned": "CholoClear-X"
+    },
+    "expected_processing": {
+      "catalog_match_result": null,
+      "hcp_system_id": null,
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": ["Gate 2: Classification confidence — ~0.05 < 0.9", "Gate 5: Catalog match — not resolved (out-of-scope docs are not enriched)", "Gate 6: HCP link — not resolved (out of scope)", "Gate 8: In scope — out of scope (no class matched)"]
+    }
+  },
+  "labeling_notes": [
+    "GATE 8 (in-scope): the model scores every class ~0 and sets out_of_scope=True → Gate 8 fails → MIS. This is the 'spam / off-topic → human cleanup' path. predicted_class is the nominal closest (Public Health / FAQ Deflection, a no-record class) — NOT a value 'Out of scope' (that's a flag, not a class).",
+    "THE KEYWORD TRAP IT DEFEATS: the text name-drops 'CholoClear-X', so a naive keyword extractor would build a bogus case in the medical database. We do NOT enrich out-of-scope docs — catalog/HCP are left unresolved (catalog_match_result=null) so a spam blast never shows a clean product match. Mentioning a product ≠ a medical inquiry.",
+    "COUPLING (honest): Gate 8 co-fires Gate 2 (conf ~0.05 — an out-of-scope doc fits no class) and Gate 6 (no real reporter). Like Gate 3, Gate 8 can't be cleanly isolated. We keep it because out_of_scope is an INTERPRETABLE, actionable flag ('spam, bulk-reject') vs Gate 2's generic 'low confidence, look closer' — different reviewer handling.",
+    "GROUND TRUTH SCOPE: reporter_name/type/customer_org are intentionally omitted (a spam blast has no real reporter, so they're unstable to extract). The point of this case is the routing (MIS via out_of_scope) + the class/flag, not the contact fields."
+  ]
+}

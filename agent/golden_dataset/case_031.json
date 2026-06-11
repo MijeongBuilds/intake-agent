@@ -1,0 +1,31 @@
+{
+  "case_id": "VAULT_EVAL_031",
+  "scenario": "Standard Response Request \u2014 HCP explicitly asks for the pre-approved standard letter, not a custom answer.",
+  "input_text": "SOURCE CHANNEL: Email\n\nCardioMed Medical Information,\n\nCould you please send me your Standard Response Document or approved information packet covering the adult dosing and administration of CholoClear-X? I don't need a tailored reply \u2014 just the standard pre-cleared letter your team circulates for formulary files.\n\nThanks,\nDaniel Okafor, MD\nWestlake Cardiology Associates, Austin, TX\nEmail: d.okafor@westlakecardio.com",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_031",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Standard Response Request",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "Explicit request for a pre-compiled SRD/packet \u2014 not a clinical question to answer.",
+    "Unbuilt class (no automated extractor) -> fails safe to MIS."
+  ]
+}

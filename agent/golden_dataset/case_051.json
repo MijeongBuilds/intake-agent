@@ -1,0 +1,31 @@
+{
+  "case_id": "VAULT_EVAL_051",
+  "scenario": "Out of scope \u2014 inquiry purely about a COMPETITOR's drug (nothing about our products).",
+  "input_text": "SOURCE CHANNEL: Email\n\nHello,\n\nCan you tell me the recommended titration schedule and contraindications for LipidShield-PRO? My patient is on it and I want the latest prescribing guidance.\n\nDr. Aaron Webb, MD\nLakeside Internal Medicine",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_051",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Out of scope",
+    "adverse_event_flag": false,
+    "out_of_scope": true,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "The inquiry is ENTIRELY about a competitor product (LipidShield-PRO) and asks nothing about our portfolio -> Out of scope (not ours; redirect to a human).",
+    "Pairs with case_015 (competitor named as CONTEXT but the real ask is about OUR product -> On-Label)."
+  ]
+}

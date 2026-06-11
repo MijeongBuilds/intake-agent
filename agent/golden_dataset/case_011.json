@@ -1,0 +1,29 @@
+{
+  "case_id": "VAULT_EVAL_011",
+  "scenario": "Garbage scan (UNREADABLE) — a low-resolution, heavily artifacted legacy fax with bleed-through and fragmented characters yields OCR 0.60. Gate 1 (pre-classify) halts it BEFORE any LLM call and routes to the Unreadable Queue for human transcription. The paradox that makes it valuable: critical safety keywords ('hepatic failure', 'ICU', '15-day clock') are buried in the noise, but because the text can't be trusted, the system refuses to parse it — it fast-tracks it to a human instead of risking a mis-parsed safety signal.",
+  "input_text": "RE_CEIVED: 08-JUN-2026 04:12 AM FAX FROM: [UNKNOWN NUM_BER]\nPAGE INT_EGRITY: CRITICAL ERRORS DETECTED BY upstream OCR ENGINE\n\n[--- RAW EXTRACTED FRAGMENTS COMMENCE ---]\nMED____ L_INF__MA___ON DESK\n\nAttn: Qua___ty As__rance / Med__cal\n\nTh_s _s Dr. Al___an M____st__ from Ch__cago Med__ca_ C_nt___. We ur__nt_y ne_d to re__rt a se_io__ issue w_th C___loC___r-_ [BLURRED].\n\nPa__ent [ILLEGIBLE] d__e: 202_-_6-_1\nL_t Num_er: C_X-88_ [CHARACTERS OVERLAPPED WITH INK SMUDGE]\n\nSym__toms: P_t__nt ex__r_enc_d se__re a_u_e [MESSY BLEED THROUGH TEXT FROM REVERSE PAGE] __p_t_c fa__u_e and w__ h__pi__li__d in the I_U. Th__ _s a 15-d__y cl_ck [ILLEGIBLE]. Please c_nf_rm r_ce__t of th_s f_x _mmed_at__y at _ur ph__ne: 312-555-01__ [STREAK LINE OBSCURING LAST TWO DIGITS].\n\n[--- END OF STREAM - INTEGRITY INDEX 60% ---]",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_011",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Network API",
+    "file_format": "flattened_pdf_fax_image",
+    "ocr_confidence": 0.60,
+    "received_date": "2026-06-08"
+  },
+  "ground_truth": {
+    "halts_pre_classify": true,
+    "expected_processing": {
+      "routing_target": "Unreadable Queue",
+      "record_status": "Pending Review",
+      "failed_gates": ["Gate 1 (pre-classify): OCR 0.60 < 0.75 — unreadable; halted before classification (no LLM spent)"]
+    },
+    "latent_content_note": "What the document WOULD be if legible: a Serious AE (acute hepatic failure + ICU admission) for CholoClear-X from a physician. This is NOT computed by the agent — the case halts before classify, so predicted_class / pillars / metadata / record / catalog / HCP / regulatory_due_date are all intentionally absent. The only scored field is routing_target = Unreadable Queue."
+  },
+  "labeling_notes": [
+    "WHAT THE HARNESS SCORES: a halted case is scored ONLY on routing_target == 'Unreadable Queue'. No classification or extraction is produced (the pipeline returns at check_readability), so there is no class/record/gate ground truth to compare — by design.",
+    "REAL-WORLD PARADOX (the interview point): the text contains critical safety keywords ('hepatic failure', 'ICU', '15-day clock'), but the OCR quality (0.60) is below the 0.75 trust floor. The system does NOT try to parse a garbled safety signal — a mis-read AE is more dangerous than an escalated one.",
+    "GATE 1 PRE-CLASSIFY HALT: OCR < 0.75 triggers a hard stop BEFORE the LLM is called (no model cost spent on junk text). Routed straight to the Unreadable Queue for human transcription.",
+    "AE-RECALL NUANCE: this unreadable AE is NOT counted against the agent's AE-recall floor — the AI did not 'miss' it, it correctly escalated it to a human. The agent's job on unreadable docs is to ESCALATE, not extract.",
+    "DAY 0 INTEGRITY: the agent does not compute a due date here (it can't read the doc). But Day 0 is preserved: received_date (2026-06-08) is stamped at INGESTION, in the envelope — so when a human transcribes the fax, the regulatory clock back-dates to intake, not to the (later) transcription time."
+  ]
+}

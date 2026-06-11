@@ -1,0 +1,55 @@
+{
+  "case_id": "VAULT_EVAL_027",
+  "scenario": "Incomplete AE — a pharmacist reports a walk-in customer's reaction, but the PATIENT is not identifiable (no name/age/details). Reporter/product/event present, patient pillar missing -> is_valid_icsr = False. Routes to PV (Gate 4); the 4-pillar panel shows DRUG/EVENT/REPORTER valid but PATIENT VERIFY -> outreach needed. Fills the 'not submission-ready' coverage gap.",
+  "input_text": "SOURCE CHANNEL: Email Inbound Gateway\nPRIMARY DISPATCH LOG: safety-intake@cardiomedglobal.com\n\nMESSAGE BODY:\nHi CardioMed,\n\nI'm a community pharmacist. This morning a customer came to my counter quite distressed — they said they had developed significant facial and lip swelling a few hours after taking CholoClear-X, which they'd just picked up. Before I could take down their name or any details, they rushed off to an urgent care clinic. I don't have their information, but I felt I should report the reaction in case it's important for your safety monitoring.\n\nRegards,\nGregory Pratt, RPh\nCornerstone Community Pharmacy\nEmail: gpratt@cornerstonerx.com",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_027",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-09"
+  },
+  "ground_truth": {
+    "predicted_class": "Adverse Event Report",
+    "adverse_event_flag": true,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": true,
+    "has_product_pillar": true,
+    "has_event_pillar": true,
+    "common_metadata": {
+      "customer_org": "Cornerstone Community Pharmacy",
+      "reporter_name": "Gregory Pratt",
+      "reporter_type": "HCP - Pharmacist",
+      "contact_email": "gpratt@cornerstonerx.com",
+      "contact_phone": null,
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X"
+    },
+    "ae_record": {
+      "patient_initials": null,
+      "patient_age": null,
+      "patient_gender": null,
+      "onset_date": null,
+      "adverse_symptoms_list": ["facial swelling", "lip swelling"],
+      "concomitant_medications_list": [],
+      "ae_seriousness": "Serious",
+      "is_valid_icsr": false
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": null,
+      "record_status": "Pending Review",
+      "routing_target": "PV Queue",
+      "failed_gates": ["Gate 4: Adverse-event policy — AE flag set -> PV (never auto-approve)", "Gate 6: HCP link — reporter not found in HCP registry"]
+    }
+  },
+  "labeling_notes": [
+    "INCOMPLETE ICSR (the point of this case): reporter (the pharmacist), product (CholoClear-X), and event (facial/lip swelling = possible angioedema) are present, but there is NO identifiable patient -> has_patient_pillar False -> is_valid_icsr False. The 4-pillar panel shows PATIENT as VERIFY, not submission-ready -> PV must conduct outreach for the missing patient identifier. All other PV golden cases are submission-ready; this exercises the outreach state.",
+    "SERIOUS: facial + lip swelling reads as possible angioedema (an Important Medical Event) and the customer left for urgent care -> labeled Serious. Over-calling seriousness errs in the safe direction for PV triage.",
+    "ROUTING unchanged: Gate 4 routes every AE to PV regardless of completeness. Gate 6 fails (the pharmacist is not in this tenant's HCP registry) — noted, not a blocker for an AE.",
+    "PRIVACY: no patient identifiers are invented — patient_initials/age/gender are all null because the source genuinely contains none."
+  ]
+}

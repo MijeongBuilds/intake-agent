@@ -1,0 +1,69 @@
+{
+  "case_id": "VAULT_EVAL_008",
+  "scenario": "Serious adverse event (PV ESCALATION) — a physician faxes a critical, multi-symptom anaphylaxis report on a marketed product; the scan is mid-band OCR (0.84). Proves: (1) AE detection on an EXPLICIT serious case (vs case_021's hidden AE); (2) Gate 4 override beats a failing Gate 1 (mid-band OCR would route a non-AE to MIS, but the AE routes to PV regardless); (3) seriousness is unambiguously Serious (ICU + life-threatening), a stable contrast to case_021's borderline verdict; (4) Day 0 -> 15-day expedited post-marketing clock; (5) HCP reporter (vs consumer), all four pillars present -> valid ICSR.",
+  "input_text": "FAX INBOUND REFLINE: FX-CARDIOLOGY-STJUDE-2026\nDATE: JUNE 06, 2026\nFROM: St. Jude Heart & Vascular Center, Emergency Consult Service\nTO: BioPharma Corporate Pharmacovigilance & Medical Affairs\n\nCRITICAL ADVERSE EVENT REPORT — SPONTANEOUS SURVEILLANCE\n\nAttn: Medical Information Director,\n\nI am writing to formally log a severe, life-threatening suspected adverse drug reaction regarding your oral small-molecule agent, CholoClear-X (50mg formulation).\n\nThe patient, a 58-year-old Caucasian female (Initials: R.K.), was prescribed CholoClear-X on an outpatient basis for refractory hypercholesterolemia. This morning, approximately 30 minutes after ingesting her second scheduled dose, she experienced an explosive, acute systemic hypersensitivity cascade.\n\nUpon emergency arrival at our facility, clinical presentation included severe upper airway throat swelling, profound diff1cultly breath1ng [sic], widespread confluent urticarial hives, and a critical hemodynamic blood pressure crash (systolic dropped to 62 mmHg, presenting in profound anaphylactic shock).\n\nAggressive emergency intervention was initiated immediately with intramuscular epinephrine, high-dose intravenous corticosteroids, and massive crystalloid fluid resuscitation. Due to severe respiratory distress and hemodynamic instability, she was urgently transferred and admitted to our Cardiac Intensive Care Unit (ICU Bed 4) for continuous vasopressor support and airway monitoring. She is currently stabilized but remains in critical condition. No concomitant medications were introduced prior to the event, and she has no history of clinical trial enrollment.\n\nPlease log this case immediately. Address any inquiries or requests for follow-up to my desk.\n\nReporting Cardiologist:\nDr. Samuel Brennan, MD, FACC\nSenior Attending Cardiologist, Registry ID: #NET_HCP_77412\nSt. Jude Heart & Vascular Center, 500 Harrison Ave, Chicago, IL 60618\nOffice Phone: 312-555-0177 | Secure Email: sbrennan@stjudeheart.org",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_008",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "flattened_pdf_ocr",
+    "ocr_confidence": 0.84,
+    "received_date": "2026-06-06"
+  },
+  "ground_truth": {
+    "predicted_class": "Adverse Event Report",
+    "adverse_event_flag": true,
+    "out_of_scope": false,
+    "has_patient_pillar": true,
+    "has_reporter_pillar": true,
+    "has_product_pillar": true,
+    "has_event_pillar": true,
+    "common_metadata": {
+      "customer_org": "St. Jude Heart & Vascular Center",
+      "reporter_name": "Samuel Brennan",
+      "reporter_type": "HCP - Physician",
+      "contact_email": "sbrennan@stjudeheart.org",
+      "contact_phone": "+13125550177",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X",
+      "active_study_flag": false,
+      "study_id": null
+    },
+    "ae_record": {
+      "patient_initials": "R.K.",
+      "patient_age": "58",
+      "patient_gender": "female",
+      "onset_date": null,
+      "adverse_symptoms_list": [
+        "throat swelling",
+        "difficulty breathing",
+        "hives",
+        "blood pressure crash",
+        "anaphylactic shock"
+      ],
+      "concomitant_medications_list": [],
+      "ae_seriousness": "Serious",
+      "is_valid_icsr": true
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": "NET_HCP_77412",
+      "record_status": "Pending Review",
+      "routing_target": "PV Queue",
+      "failed_gates": ["Gate 1: Text quality (OCR) — low: OCR 0.84 < 0.9", "Gate 4: Adverse-event policy — AE flag set -> PV (never auto-approve)"],
+      "day_zero": "2026-06-06",
+      "regulatory_due_date": "2026-06-21",
+      "reporting_regime": "Post-Marketing (Spontaneous)"
+    }
+  },
+  "labeling_notes": [
+    "MID-BAND OCR (Gate 1): ocr_confidence 0.84 sits in the 0.75-0.90 band. For a NON-AE this would fail Gate 1 -> MIS; here Gate 4 (AE policy override) takes precedence and routes to PV regardless. This case proves the override beats a failing OCR gate.",
+    "SAFETY-FIRST DETECTION: explicit, overt adverse event (anaphylactic shock + ICU admission). Complements case_021, where the AE was hidden under an FAQ-looking surface ask. Together they cover both overt and disguised AE detection.",
+    "SERIOUSNESS = SERIOUS (stable): meets ICH E2A (b) life-threatening (systolic 62 mmHg / anaphylactic shock) AND (c) inpatient hospitalization (ICU admission). Unambiguous, so the best-of-3 self-consistency vote should land 3/3 Serious — a clean contrast to case_021's borderline split.",
+    "DAY 0 + CLOCK: fax received at Medical Information on 2026-06-06 = Day 0; the regulatory clock starts here, not at PV. Serious + post-marketing spontaneous -> 15 calendar days -> due 2026-06-21.",
+    "FOUR PILLARS -> VALID ICSR: Patient (R.K.), Reporter (Dr. Samuel Brennan), Product (CholoClear-X), Event (anaphylaxis). is_valid_icsr recomputed in code from the pillars -> true (submission-ready).",
+    "OCR NOISE: 'diff1cultly breath1ng [sic]' is deliberate scan-degradation noise; the model reads through it to the intended symptom. We do not claim a separate token-healing layer — the LLM simply parses the noisy text.",
+    "AUTHORING NOTE: patient_age / patient_gender / reporter_name are free-form strings; ground-truth values were aligned to the model's correct extraction after the first run (see chat). onset_date is null because 'this morning' is a relative reference (our AE prompt forbids inferring a calendar date)."
+  ]
+}

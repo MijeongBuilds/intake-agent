@@ -1,0 +1,48 @@
+# Customer configuration for TENANT_BIO_99 (CardioMed Global).
+# This is what makes the agent multi-tenant: the SAME code reads THIS file.
+# Adding a new customer = adding a new YAML here, not changing code.
+#
+# NOTE: taxonomy `name` values MUST match the DocClass enum in schemas.py exactly
+# (the enum is the source of truth for valid labels; this file supplies descriptions).
+
+tenant_id: TENANT_BIO_99
+customer_name: CardioMed Global
+
+taxonomy:
+  - name: "On-Label Medical Inquiry"
+    description: "A question about APPROVED uses, standard dosages, contraindications, or clinical data found in the official product package insert."
+  - name: "Off-Label Medical Inquiry"
+    description: "A question about UNAPPROVED uses, unapproved age groups, or alternative dosages NOT in the official label."
+  - name: "Standard Response Request"
+    description: "An explicit request for a pre-compiled data packet or Standard Response Document (SRD)."
+  - name: "Formulation & Excipient Information"
+    description: "A technical question about drug ingredients, coatings, allergens, or manufacturing components (e.g., gluten, gelatin, latex)."
+  - name: "Expanded Access / Compassionate Use"
+    description: "An urgent request from a physician seeking an UNAPPROVED investigational drug for a terminally ill patient outside a clinical trial."
+  - name: "Investigator-Initiated Trial Proposal"
+    description: "An unsolicited proposal from an independent physician seeking funding or drug supply to run their own research."
+  - name: "Adverse Event Report"
+    description: "Any report of a patient side effect, adverse reaction, injury, or unexpected clinical outcome."
+  - name: "Product Quality Complaint"
+    description: "A report of a physical product defect (cracked vial, missing label, cloudiness, device malfunction)."
+  - name: "Legal / Regulatory Authority Correspondence"
+    description: "Official communication FROM a government health agency (FDA, EMA, health ministry) — e.g., a warning letter or audit notice."
+  - name: "Public Health / FAQ Deflection"
+    description: "A low-risk general/consumer informational request (where to buy, how to store, brochure links) with NO clinical question or safety content."
+
+# Gate thresholds (also customer-tunable).
+thresholds:
+  classification_confidence_min: 0.90   # Gate 2 — tuned from 0.95 after golden-set calibration (clean cases scored ~0.93). Re-calibrate once full golden set exists.
+  conflict_margin_min: 0.30             # Gate 3 (Conflict margin) — RETIRED. Eval proved confidence & margin are coupled, so Gate 3 never fired independently of Gate 2 (redundant). Removed from routing; key kept for reference only. The margin is still computed + shown for audit.
+  ocr_auto_approve_min: 0.90            # Gate 1: >= this -> auto-approve eligible
+  ocr_unreadable_below: 0.75            # Gate 1: < this -> unreadable queue
+
+# Regulatory reporting deadlines, in CALENDAR DAYS from Day 0 (= the moment the file
+# hits Medical Information intake; the clock starts HERE, not at PV escalation).
+# Post-marketing spontaneous is the default regime; clinical-trial (active study or
+# product-as-comparator) is the exception, flagged at intake via active_study_flag.
+reporting_deadlines_days:
+  post_marketing_serious: 15            # expedited "15-day Alert Report" (FDA 21 CFR 314.80; EU GVP VI)
+  post_marketing_non_serious: 90        # NOT expedited -> aggregated periodic report (PBRER/PSUR)
+  clinical_trial_serious: 15            # SUSAR, other serious unexpected
+  clinical_trial_life_threatening: 7    # SUSAR, fatal/life-threatening (not separately detected in MVP)

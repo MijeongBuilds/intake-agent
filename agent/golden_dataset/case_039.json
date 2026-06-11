@@ -1,0 +1,31 @@
+{
+  "case_id": "VAULT_EVAL_039",
+  "scenario": "Legal / Regulatory Authority Correspondence \u2014 official information request FROM the FDA.",
+  "input_text": "SOURCE CHANNEL: Email (Regulatory Inbox)\n\nU.S. FOOD AND DRUG ADMINISTRATION\nCenter for Drug Evaluation and Research\n\nRE: Information Request \u2014 CholoClear-X (NDA 21-XXXX)\n\nThis letter constitutes an official request for information following our recent inspection. Please provide, within 15 business days, your complete post-marketing adverse event reconciliation logs and the associated SOPs referenced during the inspection. Direct your response to the assigned project manager.\n\nOffice of Compliance, CDER\nU.S. FDA",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_039",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Legal / Regulatory Authority Correspondence",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "Official communication FROM a government agency (FDA) \u2014 Legal/Regulatory, not a medical inquiry.",
+    "High-priority regulatory routing to a human team."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "case_id": "VAULT_EVAL_041",
+  "scenario": "Adverse Event \u2014 structured MedWatch 3500A-style form (key-value layout, scanned).",
+  "input_text": "FORM: FDA MEDWATCH 3500A (VOLUNTARY)\nFIELD A.1 Patient Initials: R.T.\nFIELD A.2 Age: 67    A.3 Sex: M\nFIELD B.1 Outcome: Hospitalized\nFIELD B.5 Describe Event: Patient developed severe muscle pain and dark urine approximately one week after starting CholoClear-X 50mg; admitted for suspected rhabdomyolysis.\nFIELD C.1 Suspect Product: CholoClear-X 50mg oral\nFIELD D.1 Reporter: Dr. S. Okonkwo, MD \u2014 Cleveland, OH",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_041",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Fax (Scanned)",
+    "file_format": "scanned_image_pdf",
+    "ocr_confidence": 0.95,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Adverse Event Report",
+    "adverse_event_flag": true,
+    "out_of_scope": false,
+    "has_patient_pillar": true,
+    "has_reporter_pillar": true,
+    "has_product_pillar": true,
+    "has_event_pillar": true,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "PV Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "Adverse event presented as a structured form (key-value), not prose -> tests form parsing.",
+    "Serious (hospitalization). Routes to PV via Gate 4."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "case_id": "VAULT_EVAL_012",
+  "scenario": "Mediocre scan, non-AE (MIS FORCED REVIEW) — a scanned fax whose OCR ENGINE reports low confidence (0.82) due to scan skew/faintness, even though the characters resolved cleanly. The inquiry is a canonical On-Label dosage question, so the classifier is confident and the pipeline extracts a complete draft + resolves a pre-approved SRD; Gate 1 alone blocks auto-approve and routes to MIS. Isolates Gate 1: OCR confidence is the engine's certainty (a separate signal from legibility), and at 0.75-0.90 we force human review even when the text looks fine.",
+  "input_text": "FAX TRANSMISSION -- RECEIVED VIA INBOUND NODE 4\nTIMESTAMP: 2026-06-08 11:14 UTC\n\nTO: CardioMed Medical Info Team\nFROM: St. Jude Clinical Pharmacy Dept\nREQUESTOR: Sarah Jenkins, RPh (Lead Pharmacist)\nCONTACT EMAIL: s.jenkins@stjudehealth.org\n\nMESSAGE BODY:\nDear Medical Affairs,\n\nWe have a dosing question regarding your commercial lipid-lowering tablet, CholoClear-X (50mg oral).\n\nWe have an adult patient with refractory hypercholesterolemia who is tolerating the standard 50mg once-daily dose well but has not yet reached target LDL. Could you confirm whether the approved package insert supports titrating CholoClear-X above 50mg per day (for example to 75mg or 100mg daily), or is 50mg the maximum approved adult maintenance dose?\n\nWe want to stay strictly within the approved label before adjusting this patient's regimen. Please point us to the relevant Dosage and Administration section.\n\nRegards,\nSarah Jenkins, RPh\nSt. Jude Clinical Pharmacy\nPhone: 901-555-0144",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_012",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Network API",
+    "file_format": "flattened_pdf_fax_image",
+    "ocr_confidence": 0.82,
+    "received_date": "2026-06-08"
+  },
+  "ground_truth": {
+    "predicted_class": "On-Label Medical Inquiry",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "common_metadata": {
+      "customer_org": "St. Jude Clinical Pharmacy",
+      "reporter_name": "Sarah Jenkins",
+      "reporter_type": "HCP - Pharmacist",
+      "contact_email": "s.jenkins@stjudehealth.org",
+      "contact_phone": "+19015550144",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X",
+      "active_study_flag": false,
+      "study_id": null
+    },
+    "on_label_record": {
+      "record_type": "On-Label Inquiry",
+      "target_package_insert_section": "Dosage and Administration",
+      "inquiry_summary_text": "Pharmacist asks whether the approved label supports titrating CholoClear-X above the 50mg/day adult maintenance dose for a patient not yet at target LDL.",
+      "suggested_srd_match": "SRD_CHOLO_DOSAGE_ADULT_v2"
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": "NET_HCP_33219",
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": ["Gate 1: Text quality (OCR) — low: OCR 0.82 < 0.9"],
+      "day_zero": "2026-06-08",
+      "regulatory_due_date": null,
+      "reporting_regime": null
+    }
+  },
+  "labeling_notes": [
+    "GATE 1 (stable) + CONFIDENCE FLUTTER (calibration finding): Gate 1 always fails on the OCR band (0.82) -> MIS, so the OUTCOME is stable. The classifier confidence on this same clean On-Label question FLUTTERS across runs (observed 0.82 / 0.88 / 0.91), so Gate 2 sometimes co-fires and sometimes doesn't — it sits right on the 0.90 line. Takeaway: a single confidence reading near the threshold is noisy; the 0.90 gate flips borderline cases run-to-run (reinforces the 0.95->0.90 calibration story; the robust Gate-2 failure lives in case_015 at 0.62). Gate 4/5/6/8 all pass; Gate 1 alone drives MIS.",
+    "WHY OCR 0.82 ON CLEAN TEXT: OCR confidence is the engine's CERTAINTY about its own output (driven by scan skew, faintness, resolution), which is a separate signal from human legibility. The 0.75-0.90 tier exists precisely for this: don't fully trust the scan even when it looks fine -> force a human to verify. (Contrast case_011, where the text was genuinely garbled at 0.60 and halted pre-classify.)",
+    "DESIGN FINDING: an earlier draft used a STORAGE-excursion question with visible scan noise; it scored only ~0.82 classifier confidence (the noise depresses the model's confidence, and 'storage' isn't named in our On-Label taxonomy description), tripping Gate 2 as well. We separated the concerns: keep #12 clean to isolate Gate 1, and reuse that storage/noise scenario for the Gate 2 case (#13).",
+    "SRD RETRIEVAL: the dosage question maps to a pre-approved SRD (SRD_CHOLO_DOSAGE_ADULT_v2, the 50mg/day ceiling) — the AI SUGGESTS it for the reviewer, never authors or sends.",
+    "DAY 0: received_date 2026-06-08 is stamped, but no regulatory_due_date is computed — the 15/90-day clock applies only to AE cases."
+  ]
+}

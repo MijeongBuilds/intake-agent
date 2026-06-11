@@ -1,0 +1,55 @@
+{
+  "case_id": "VAULT_EVAL_023",
+  "scenario": "Scanned-but-clean dosing question (AUTO-APPROVE, OCR >=0.90 numeric tier) — identical inquiry to case_001, but arriving as a high-quality scan (ocr_confidence 0.92) instead of digital-native. Purpose: exercise Gate 1's numeric '>= 0.90 -> pass' branch (case_001 uses the null/digital-native branch). A clean OCR A/B: same document, only the OCR signal changes, and it still auto-approves because 0.92 clears the 0.90 floor.",
+  "input_text": "SOURCE CHANNEL: Web Portal\nSUBMISSION PORTAL REF: portal-inbound-auth-4410\n\nMESSAGE BODY:\nCardioMed Medical Affairs Desk,\n\nI am a staff pharmacist at Boston Medical Center currently verifying an inpatient medical order entry for a patient who has been prescribed your product CholoClear-X.\n\nThe physician's order lists a titration schedule that reaches 100mg daily. However, our internal clinical pharmacy guidelines state that the maximum recommended maintenance amount on the standard product label is 50mg daily. Could your team please confirm the exact approved package insert ceiling guidelines for standard adult hypercholesterolemia administration?\n\nI want to cross-reference our internal database parameters with your official documentation before dispensing the medication to the ward this afternoon.\n\nThank you,\nJonathan Vance, PharmD\nBoston Medical Center Pharmacy Dept\nEmail: jvance@bostonmed.org | Phone: 617-555-0122",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_023",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Web Portal",
+    "file_format": "flattened_pdf_ocr",
+    "ocr_confidence": 0.92,
+    "received_date": "2026-06-02"
+  },
+  "ground_truth": {
+    "predicted_class": "On-Label Medical Inquiry",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "common_metadata": {
+      "customer_org": "Boston Medical Center",
+      "reporter_name": "Jonathan Vance",
+      "reporter_type": "HCP - Pharmacist",
+      "contact_email": "jvance@bostonmed.org",
+      "contact_phone": "+16175550122",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X",
+      "active_study_flag": false,
+      "study_id": null
+    },
+    "on_label_record": {
+      "record_type": "On-Label Inquiry",
+      "target_package_insert_section": "Dosage and Administration",
+      "inquiry_summary_text": "Pharmacist querying the approved maximum adult maintenance titration dosage limits for CholoClear-X.",
+      "suggested_srd_match": "SRD_CHOLO_DOSAGE_ADULT_v2"
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": "NET_HCP_88421",
+      "record_status": "Approved",
+      "routing_target": "Auto-Approve",
+      "failed_gates": [],
+      "day_zero": "2026-06-02",
+      "regulatory_due_date": null,
+      "reporting_regime": null
+    }
+  },
+  "labeling_notes": [
+    "GATE 1 NUMERIC >=0.90 BRANCH: ocr_confidence 0.92 clears the 0.90 auto-approve floor, so Gate 1 passes via the numeric branch ('OCR 0.92 >= 0.9'). This is the tier case_001 does NOT exercise (case_001 is digital-native -> null branch).",
+    "OCR A/B WITH case_001: identical text and ground truth; only ocr_confidence differs (null vs 0.92). Together the two prove both Gate 1 PASS branches; case_012 (0.82->MIS) and case_011 (0.60->Unreadable) prove the two FAIL tiers. Note for metrics: this is a deliberate branch-coverage twin of case_001, not independent auto-approve evidence.",
+    "STILL AUTO-APPROVES: all 8 gates pass exactly as in case_001 (reporter Jonathan Vance -> NET_HCP_88421, product -> PROD_CHOLO_MED, no AE, in scope, confident). High-quality scans are auto-approve-eligible — only the 0.75-0.90 band forces review."
+  ]
+}

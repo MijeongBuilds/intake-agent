@@ -1,0 +1,31 @@
+{
+  "case_id": "VAULT_EVAL_048",
+  "scenario": "Public Health / FAQ \u2014 a genuine low-risk consumer info question (no clinical/safety content).",
+  "input_text": "SOURCE CHANNEL: Web Portal\n\nHi, I just got prescribed CholoClear-X. Two quick questions: which pharmacies near me carry it, and do I need to keep it in the fridge or is room temperature okay? Thanks!\n\n\u2014 A patient",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_048",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Web Portal",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Public Health / FAQ Deflection",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "Genuine consumer info request (where to buy, how to store) with NO clinical question and NO safety content -> Public/FAQ.",
+    "Distinct from out-of-scope spam: this IS a real product question, just low-risk/no-record."
+  ]
+}

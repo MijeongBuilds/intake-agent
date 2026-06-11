@@ -1,0 +1,16 @@
+{
+  "_note": "Product catalog for this tenant (Gate 5 lookup). The containing folder identifies the tenant, so no internal tenant key is needed.",
+  "products": [
+    { "catalog_id": "PROD_CHOLO_MED", "brand_name": "CholoClear-X", "dosage_form": "50mg Oral Tablet", "therapeutic_area": "Cardiovascular / Hypercholesterolemia", "is_active": true },
+    { "catalog_id": "PROD_CHOLO_INJ", "brand_name": "CholoClear-X Injectable", "dosage_form": "100mg/mL Subcutaneous Injection Kit", "therapeutic_area": "Cardiovascular / Rare Disease Genetics", "is_active": true },
+    { "catalog_id": "PROD_VAMPL_10", "brand_name": "Vamplira", "dosage_form": "10mg Extended Release Capsule", "therapeutic_area": "Neurology / Multiple Sclerosis", "is_active": true },
+    { "catalog_id": "PROD_VAMPL_20", "brand_name": "Vamplira Forte", "dosage_form": "20mg Extended Release Capsule", "therapeutic_area": "Neurology / Multiple Sclerosis", "is_active": true },
+    { "catalog_id": "PROD_HEPAT_XL", "brand_name": "HepatoShield", "dosage_form": "250mg Intravenous Infusion Vial", "therapeutic_area": "Hepatology / Acute Liver Failure", "is_active": true },
+    { "catalog_id": "PROD_GLUCO_REG", "brand_name": "GlycoSteady", "dosage_form": "5mg Metformin-Coated Tablet", "therapeutic_area": "Endocrinology / Type 2 Diabetes", "is_active": true },
+    { "catalog_id": "PROD_ONCO_MAB", "brand_name": "Zextramab", "dosage_form": "500mg Monoclonal Antibody Infusion", "therapeutic_area": "Oncology / Advanced Breast Cancer", "is_active": true },
+    { "catalog_id": "PROD_RESP_HAL", "brand_name": "BreatheEze", "dosage_form": "100mcg Metered Dose Inhaler", "therapeutic_area": "Pulmonology / Severe Asthma", "is_active": true },
+    { "catalog_id": "PROD_RHEUM_05", "brand_name": "ArthriFree", "dosage_form": "5mg Subcutaneous Pre-filled Syringe", "therapeutic_area": "Immunology / Rheumatoid Arthritis", "is_active": true },
+    { "catalog_id": "PROD_DERM_GEL", "brand_name": "CutaHeal", "dosage_form": "0.1% Topical Gel Tube", "therapeutic_area": "Dermatology / Severe Atopic Dermatitis", "is_active": false },
+    { "catalog_id": "PROD_CMG_401_INV", "brand_name": "CMG-401", "dosage_form": "Investigational Subcutaneous Injection (Phase II)", "therapeutic_area": "Cardiovascular / Investigational PCSK9 Inhibitor", "is_active": false, "is_investigational": true }
+  ]
+}

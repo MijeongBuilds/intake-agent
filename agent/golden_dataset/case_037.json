@@ -1,0 +1,31 @@
+{
+  "case_id": "VAULT_EVAL_037",
+  "scenario": "Product Quality Complaint \u2014 physical tablet defect, no patient exposure, no adverse event.",
+  "input_text": "SOURCE CHANNEL: Email\n\nCardioMed Quality / Medical Info,\n\nWe received a bottle of CholoClear-X 50mg tablets in our pharmacy where roughly a third of the tablets are visibly cracked and several are discolored (brownish spotting). No patient has taken any of these \u2014 we pulled the bottle immediately. Lot number on the bottle is CCX-2451A. We'd like a replacement and to report the defect.\n\nNo patient harm. Please advise on return.\n\nGrace Lim, RPh\nHarborview Hospital Pharmacy, Seattle, WA",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_037",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Product Quality Complaint",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "Physical product defect (cracked/discolored tablets), explicitly NO patient exposure and NO adverse event -> clean PQC.",
+    "Must NOT be misread as an Adverse Event (no patient reaction)."
+  ]
+}

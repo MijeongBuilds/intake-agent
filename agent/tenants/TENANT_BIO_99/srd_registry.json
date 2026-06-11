@@ -1,0 +1,40 @@
+{
+  "_note": "Standard Response Document registry for this tenant. NOT gated. Stores the exact pre-approved, human-vetted response text so the UI can render it for the MIS to review and approve. The AI never authors medical text and never auto-sends. Folder identifies the tenant.",
+  "standard_response_documents": [
+    {
+      "srd_id": "SRD_CHOLO_DOSAGE_ADULT_v2",
+      "product": "CholoClear-X",
+      "topic": "Adult maintenance dosage ceiling (50mg/day)",
+      "insert_section": "Dosage and Administration",
+      "response_content_text": "Thank you for contacting Medical Information. Regarding your inquiry on CholoClear-X titration limits: The approved package insert states that the standard adult maintenance dosage for hypercholesterolemia is 50mg administered orally once daily. Titration schedules exceeding 50mg daily up to 100mg have not demonstrated additional statistically significant therapeutic efficacy in standard clinical trials and are associated with a higher incidence of transient hepatic enzyme elevations. Please refer to Section 2.1 of the enclosed Prescribing Information leaflet for full clinical trial data tables."
+    },
+    {
+      "srd_id": "SRD_CHOLO_CONTRA_v1",
+      "product": "CholoClear-X",
+      "topic": "Contraindications and hepatic warnings",
+      "insert_section": "Contraindications",
+      "response_content_text": "Thank you for your inquiry. CholoClear-X is contraindicated in patients with active hepatic disease or unexplained persistent elevations of serum transaminases. Please consult Section 4 (Contraindications) of the approved Prescribing Information for the complete list."
+    },
+    {
+      "srd_id": "SRD_CHOLO_INTERACT_v3",
+      "product": "CholoClear-X",
+      "topic": "Known drug-drug interactions",
+      "insert_section": "Drug Interactions",
+      "response_content_text": "Thank you for your inquiry on CholoClear-X interactions. Co-administration with strong CYP3A4 inhibitors may increase systemic exposure and the risk of myopathy. Please refer to Section 7 (Drug Interactions) of the approved Prescribing Information for the full interaction profile and dose-adjustment guidance."
+    },
+    {
+      "srd_id": "SRD_CHOLO_EXCIPIENT_v2",
+      "product": "CholoClear-X",
+      "topic": "Excipient and allergen composition",
+      "insert_section": "Description",
+      "response_content_text": "Thank you for your inquiry regarding CholoClear-X composition. The 50mg oral tablet is gluten-free and contains no bovine-derived gelatin. A full list of excipients is provided in Section 11 (Description) of the approved Prescribing Information."
+    },
+    {
+      "srd_id": "SRD_CHOLO_PREGNANCY_v2",
+      "product": "CholoClear-X",
+      "topic": "Maternal exposure registry data profile",
+      "insert_section": "Use in Specific Populations",
+      "response_content_text": "Thank you for your inquiry regarding CholoClear-X administration during pregnancy. CholoClear-X is classified as Teratogenic Risk Category X. There are no adequate and well-controlled studies in pregnant women; animal data demonstrate significant structural fetal anomalies at exposures equivalent to human clinical dosages. Discontinue immediately upon confirmation of pregnancy. Providers are encouraged to report maternal exposure to the Global CardioMed Safety Exposure Registry at 1-800-555-0199."
+    }
+  ]
+}

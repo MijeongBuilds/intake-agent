@@ -1,0 +1,30 @@
+{
+  "case_id": "VAULT_EVAL_032",
+  "scenario": "Standard Response Request \u2014 field medical liaison requests the standard drug-interaction packet.",
+  "input_text": "SOURCE CHANNEL: Email (Internal Field Team)\n\nHi MI team,\n\nA cardiologist on my territory asked for documentation on CholoClear-X drug interactions. Please forward the current approved Standard Response Document on interactions so I can share the pre-cleared materials. Not looking for new content \u2014 just the standard SRD.\n\nRegards,\nMarisol Vega, MSL\nCardioMed Field Medical",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_032",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Standard Response Request",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "Internal MSL requesting an SRD packet \u2014 Standard Response Request, not a medical inquiry."
+  ]
+}

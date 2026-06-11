@@ -1,0 +1,29 @@
+{
+  "case_id": "VAULT_EVAL_013",
+  "scenario": "Out-of-taxonomy / no clean fit (→ MIS). A storage-stability question that doesn't map cleanly to any of our 10 classes. Under per-class scoring the model's best guess is Formulation & Excipient Information, but only at LOW confidence (~0.62) and with the score spread across several classes — and that class has no automated extractor yet. The pipeline fails safe to MIS instead of forcing a bad auto-approval or crashing. Shows graceful handling of a document the taxonomy doesn't cover.",
+  "input_text": "SOURCE CHANNEL: Email\nMESSAGE ID: <msg-2026-0608-7741@clevelandclinic.org>\n\nMESSAGE BODY:\nDear Medical Affairs,\n\nWe have a storage-stability question regarding your commercial lipid-lowering tablet, CholoClear-X (50mg oral).\n\nA sealed bottle of CholoClear-X tablets was inadvertently left in a clinic delivery vehicle over a long weekend, where the internal temperature is estimated to have reached approximately 40 degrees C for around 30 hours, exceeding the labeled storage range.\n\nThe How Supplied / Storage and Handling section of the package insert notes a recommended storage temperature but does not specify how to handle a transient excursion of this magnitude. Could you confirm whether this heat excursion requires us to quarantine and discard the bottle, or whether stability is still acceptable for dispensing?\n\nRegards,\nPriya Nair, PharmD\nCleveland Clinic\nEmail: p.nair@clevelandclinic.org | Phone: 216-555-0133",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_013",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-08"
+  },
+  "ground_truth": {
+    "predicted_class": "On-Label Medical Inquiry",
+    "classification_exempt": true,
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue"
+    }
+  },
+  "labeling_notes": [
+    "OUT-OF-TAXONOMY: storage/handling is not one of our 10 classes, so the per-class scorer spreads its scores (no class scores high). The top is Formulation at ~0.62 — low confidence, which is the CORRECT signal (the model genuinely has no clean home for this).",
+    "CRASH-SAFETY (unbuilt class -> MIS): Formulation has no automated extractor yet, so rather than crash (NotImplementedError) the pipeline fails safe to MIS with the reason logged ('class has no automated extractor yet -> routed to human review'). A halted/early-return path, so no per-gate trace is produced — scored only on routing_target.",
+    "WHY THIS IS A GOOD CASE: it proves two safeguards at once — (1) per-class scoring surfaces genuine taxonomy gaps as low confidence, and (2) the system degrades gracefully (human review) instead of forcing a wrong class or crashing. Roadmap: add a Storage/Handling class, or a Formulation extractor.",
+    "HISTORY: pre-Option-A this case self-reported as On-Label at 0.72 and was our Gate-2 isolation. Per-class scoring revealed the truer picture (no clean fit). Gate-2 firing is still visible here via the low 0.62 confidence; case_015 also exercises low confidence."
+  ]
+}

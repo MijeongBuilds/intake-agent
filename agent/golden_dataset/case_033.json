@@ -1,0 +1,32 @@
+{
+  "case_id": "VAULT_EVAL_033",
+  "scenario": "Expanded Access / Compassionate Use \u2014 oncologist requests the INVESTIGATIONAL compound for a dying patient outside a trial.",
+  "input_text": "SOURCE CHANNEL: Email\n\nDear CardioMed Medical Affairs,\n\nI have a 61-year-old patient with homozygous familial hypercholesterolemia who has exhausted every approved therapy and is not eligible for any open clinical trial. I am writing to request compassionate-use access to your investigational agent CMG-401 under an expanded access arrangement. The patient's condition is rapidly deteriorating and we consider this their last option.\n\nPlease advise on how to proceed.\n\nDr. Helena Marsh, MD\nDirector, Lipid Disorders Clinic, Mass General, Boston, MA",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_033",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Expanded Access / Compassionate Use",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "Requests an UNAPPROVED investigational drug (CMG-401) for a terminal patient outside a trial = Expanded Access.",
+    "Distinct from Off-Label (which is an APPROVED drug used off-label).",
+    "Unbuilt class -> MIS. High urgency (would be flagged for fast human triage)."
+  ]
+}

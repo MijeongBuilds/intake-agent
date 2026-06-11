@@ -1,0 +1,30 @@
+{
+  "case_id": "VAULT_EVAL_038",
+  "scenario": "Product Quality Complaint \u2014 injectable vial defect, no adverse event.",
+  "input_text": "SOURCE CHANNEL: Fax (Scanned)\n\nTo CardioMed,\n\nDuring stock intake our nurse noticed a vial of CholoClear-X Injectable with a broken tamper seal and a small floating particle visible in the solution. The vial was quarantined and not administered to any patient. Reporting this as a quality issue and requesting guidance on replacement and return shipping.\n\nNo patient was exposed.\n\nNurse Manager, St. Anne's Regional Medical Center",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_038",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Fax (Scanned)",
+    "file_format": "scanned_image_pdf",
+    "ocr_confidence": 0.93,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Product Quality Complaint",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "expected_processing": {
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "Visible defect (broken seal, foreign particle), product quarantined, no patient exposure -> PQC, not AE."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "case_id": "VAULT_EVAL_024",
+  "scenario": "Low classifier confidence (Gate 2 → MIS). A clean, native On-Label question, but deliberately vague ('general guidance on supplements/vitamins, not a specific interaction'), so the per-class scorer rates On-Label only ~0.88 — below the 0.90 gate. Clean Gate-2 isolation: it maps clearly to a BUILT class (On-Label, margin ~0.76 so Gate 3 passes), product is in catalog, reporter is registered, native, no AE, in scope. The model knows it isn't sure enough → human review.",
+  "input_text": "SOURCE CHANNEL: Email\nMESSAGE ID: <msg-2026-0608-5521@bostonmed.org>\n\nMESSAGE BODY:\nCardioMed Medical Information,\n\nQuick general question about CholoClear-X — a few of my patients have asked whether there is anything important to know about taking it alongside common over-the-counter supplements or vitamins. I am not asking about one specific interaction, just whether the label has any general guidance I should be aware of.\n\nJonathan Vance, PharmD\nBoston Medical Center\nEmail: jvance@bostonmed.org | Phone: 617-555-0122",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_024",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-08"
+  },
+  "ground_truth": {
+    "predicted_class": "On-Label Medical Inquiry",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "common_metadata": {
+      "customer_org": "Boston Medical Center",
+      "reporter_name": "Jonathan Vance",
+      "reporter_type": "HCP - Pharmacist",
+      "contact_email": "jvance@bostonmed.org",
+      "contact_phone": "+16175550122",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X",
+      "active_study_flag": false,
+      "study_id": null
+    },
+    "on_label_record": {
+      "record_type": "On-Label Inquiry",
+      "target_package_insert_section": "Drug Interactions",
+      "inquiry_summary_text": "Pharmacist asks for general package-insert guidance on taking CholoClear-X alongside over-the-counter supplements/vitamins (no specific interaction named).",
+      "suggested_srd_match": "SRD_CHOLO_INTERACT_v3"
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": "NET_HCP_88421",
+      "record_status": "Pending Review",
+      "routing_target": "MIS Queue",
+      "failed_gates": ["Gate 2: Classification confidence — 0.88 < 0.9"],
+      "day_zero": "2026-06-08",
+      "regulatory_due_date": null,
+      "reporting_regime": null
+    }
+  },
+  "labeling_notes": [
+    "GATE 2 ISOLATION (clean, post-Option-A): the ONLY failing gate is Gate 2. Per-class scoring rates On-Label ~0.88 (below the 0.90 gate) because the question is vague/general; but On-Label clearly wins (margin ~0.76 so Gate 3 passes), so it stays a BUILT class (no unbuilt-class detour). Product in catalog (Gate 5), reporter Jonathan Vance registered NET_HCP_88421 (Gate 6), native digital (Gate 1), no AE (Gate 4), in scope (Gate 8).",
+    "REPLACES case_013 AS THE GATE-2 CASE: pre-Option-A, case_013 (storage) was the Gate-2 isolation at self-reported 0.72; under per-class scoring case_013 reclassified to Formulation (unbuilt) and now routes via the unbuilt-class safeguard. This case restores a clean, BUILT-class Gate-2 demonstration.",
+    "STABLE: per-class scoring returns 0.88 reproducibly (3/3 runs) — a reliable Gate-2 failure with the routing-critical number COMPUTED, not self-reported. Confidence calibration spread across the set: 0.72 / 0.88 / 0.93 / 0.97 / 0.99.",
+    "SRD: vague interaction question maps to SRD_CHOLO_INTERACT_v3 (Drug Interactions, CholoClear-X) — same product, so it is suggested for the reviewer (per the product-match rule, extract_v6)."
+  ]
+}

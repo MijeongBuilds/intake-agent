@@ -1,0 +1,55 @@
+{
+  "case_id": "VAULT_EVAL_028",
+  "scenario": "Fatal AE (death outcome) — HCP reports a patient death with possible association to CholoClear-X. Serious by the most severe ICH criterion (death). Complete ICSR; routes to PV via Gate 4 (expedited 15-day). Most severe case in the set.",
+  "input_text": "SOURCE CHANNEL: Email Inbound Gateway\nPRIMARY DISPATCH LOG: safety-intake@cardiomedglobal.com\n\nMESSAGE BODY:\nTo the CardioMed Safety Team,\n\nI am reporting a fatal event. A 72-year-old female patient of mine, who had been on CholoClear-X for approximately two months, was found unresponsive at home and could not be resuscitated. She had reported episodes of palpitations and lightheadedness in the days prior. While other cardiac factors may be involved, given the temporal association I am reporting this death for your safety assessment. Concomitant medications were metoprolol and apixaban.\n\nPlease acknowledge receipt.\n\nMaria Santos, MD, FACC\nLakeside Cardiology Institute\nEmail: msantos@lakesidecardio.org | Phone: 312-555-0166",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_028",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Email",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-10"
+  },
+  "ground_truth": {
+    "predicted_class": "Adverse Event Report",
+    "adverse_event_flag": true,
+    "out_of_scope": false,
+    "has_patient_pillar": true,
+    "has_reporter_pillar": true,
+    "has_product_pillar": true,
+    "has_event_pillar": true,
+    "common_metadata": {
+      "customer_org": "Lakeside Cardiology Institute",
+      "reporter_name": "Maria Santos",
+      "reporter_type": "HCP - Physician",
+      "contact_email": "msantos@lakesidecardio.org",
+      "contact_phone": "+13125550166",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X"
+    },
+    "ae_record": {
+      "patient_initials": null,
+      "patient_age": "72",
+      "patient_gender": "Female",
+      "onset_date": null,
+      "adverse_symptoms_list": ["palpitations", "lightheadedness", "found unresponsive", "death"],
+      "concomitant_medications_list": ["metoprolol", "apixaban"],
+      "ae_seriousness": "Serious",
+      "is_valid_icsr": true
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": "NET_HCP_71558",
+      "record_status": "Pending Review",
+      "routing_target": "PV Queue",
+      "failed_gates": ["Gate 4: Adverse-event policy — AE flag set -> PV (never auto-approve)"]
+    }
+  },
+  "labeling_notes": [
+    "SERIOUS by the DEATH criterion — the most severe ICH E2A criterion. Combined with case_025 (hospitalization), case_008 (life-threatening) and case_026 (non-serious), the set now spans the seriousness spectrum.",
+    "COMPLETE ICSR: identifiable patient (72F), reporter (Dr. Santos, in registry), product, and event (fatal) -> all four pillars True. Confounding cardiac factors are noted by the reporter but do not change reportability — a death with temporal association is reported.",
+    "ROUTING: Gate 4 -> PV. Gate 6 passes (Dr. Santos resolves to NET_HCP_71558). A fatal case is the canonical expedited 15-day report.",
+    "onset_date null (relative '~two months'); patient_initials null (age/sex given, no initials)."
+  ]
+}

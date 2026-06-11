@@ -1,0 +1,50 @@
+{
+  "case_id": "VAULT_EVAL_029",
+  "scenario": "Clean On-Label (AUTO-APPROVE) — verified HCP asks a straightforward Contraindications question about CholoClear-X. All gates pass -> auto-commit. Adds an auto-approve case (different PI section) so auto-approve PRECISION isn't measured on a single example.",
+  "input_text": "SOURCE CHANNEL: Web Portal\nSUBMISSION PORTAL REF: portal-inbound-auth-5521\n\nMESSAGE BODY:\nCardioMed Medical Information,\n\nI am a clinical pharmacist reviewing a new start for CholoClear-X. Could you confirm whether CholoClear-X is contraindicated in patients with active hepatic disease or persistently elevated serum transaminases? I want to verify against the approved label before we dispense.\n\nThank you,\nPriya Nair, PharmD\nCleveland Clinic\nEmail: pnair@clevelandclinic.org | Phone: 216-555-0140",
+  "input_metadata": {
+    "document_id": "VAULT_EVAL_029",
+    "tenant_id": "TENANT_BIO_99",
+    "source_channel": "Web Portal",
+    "file_format": "native_digital_txt",
+    "ocr_confidence": null,
+    "received_date": "2026-06-08"
+  },
+  "ground_truth": {
+    "predicted_class": "On-Label Medical Inquiry",
+    "adverse_event_flag": false,
+    "out_of_scope": false,
+    "has_patient_pillar": false,
+    "has_reporter_pillar": false,
+    "has_product_pillar": false,
+    "has_event_pillar": false,
+    "common_metadata": {
+      "customer_org": "Cleveland Clinic",
+      "reporter_name": "Priya Nair",
+      "reporter_type": "HCP - Pharmacist",
+      "contact_email": "pnair@clevelandclinic.org",
+      "contact_phone": "+12165550140",
+      "country_code": "US",
+      "language": "English",
+      "product_mentioned": "CholoClear-X"
+    },
+    "on_label_record": {
+      "record_type": "On-Label Inquiry",
+      "target_package_insert_section": "Contraindications",
+      "inquiry_summary_text": "Pharmacist asking whether CholoClear-X is contraindicated in patients with active hepatic disease or elevated transaminases.",
+      "suggested_srd_match": "SRD_CHOLO_CONTRA_v1"
+    },
+    "expected_processing": {
+      "catalog_match_result": "PROD_CHOLO_MED",
+      "hcp_system_id": "NET_HCP_61205",
+      "record_status": "Approved",
+      "routing_target": "Auto-Approve",
+      "failed_gates": []
+    }
+  },
+  "labeling_notes": [
+    "AUTO-APPROVE: a clean, in-scope, on-label label question from a registry-verified HCP. No safety markers, product matches catalog (PROD_CHOLO_MED), reporter resolves to NET_HCP_61205 -> all gates pass -> record auto-commits as Approved.",
+    "DISTINCT FROM case_001/023 (Dosage and Administration): this targets the Contraindications section -> suggested_srd_match SRD_CHOLO_CONTRA_v1. Two clean auto-approves (this + case_030) let auto-approve PRECISION be measured on more than one example.",
+    "NO PILLARS: on-label info request, not a safety event -> the 4 ICSR pillars default False. Native-digital -> Gate 1 passes via the no-OCR path."
+  ]
+}

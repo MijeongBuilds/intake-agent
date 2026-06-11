@@ -1,0 +1,4236 @@
+{
+  "n": 39,
+  "n_nonhalted": 38,
+  "classification_accuracy": 0.9705882352941176,
+  "terminal_accuracy": 0.9743589743589743,
+  "ae_recall": 1.0,
+  "ae_recall_n": 11,
+  "ae_precision": 1.0,
+  "ae_precision_n": 9,
+  "auto_approve_precision": 0.4,
+  "auto_approve_n": 5,
+  "coverage": 0.1282051282051282,
+  "coverage_n": 5,
+  "metadata_accuracy": 0.9545454545454546,
+  "metadata_n": 88,
+  "calibration": [
+    {
+      "range": "0.90\u20131.00",
+      "n": 33,
+      "accuracy": 0.9696969696969697
+    },
+    {
+      "range": "0.80\u20130.90",
+      "n": 2,
+      "accuracy": 1.0
+    },
+    {
+      "range": "0.00\u20130.80",
+      "n": 0,
+      "accuracy": null
+    }
+  ],
+  "by_terminal": {
+    "Auto-Approve": 5,
+    "PV Queue": 11,
+    "Unreadable Queue": 1,
+    "MIS Queue": 22
+  },
+  "graders": {
+    "faithfulness": {
+      "type": "passfail",
+      "n": 28,
+      "pass_rate": 0.9642857142857143
+    },
+    "summary_accuracy": {
+      "type": "score",
+      "n": 9,
+      "avg": 4.222222222222222,
+      "pass_rate": 0.7777777777777778,
+      "threshold": 4
+    },
+    "symptom_coverage": {
+      "type": "passfail",
+      "n": 9,
+      "pass_rate": 0.8888888888888888
+    }
+  },
+  "evals": [
+    {
+      "case_id": "VAULT_EVAL_001",
+      "halted": false,
+      "predicted_class": "On-Label Medical Inquiry",
+      "gt_class": "On-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "Auto-Approve",
+      "terminal_gt": "Auto-Approve",
+      "terminal_correct": true,
+      "auto_approved": true,
+      "metadata_results": [
+        [
+          "customer_org",
+          "fail"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "fail"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "target_package_insert_section",
+          "pass"
+        ],
+        [
+          "inquiry_summary_text",
+          "semantic"
+        ],
+        [
+          "suggested_srd_match",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": false,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"Boston Medical Center Pharmacy Dept\" is supported by \"Boston Medical Center Pharmacy Dept\" in the source.\n2. **reporter_name**: \"Jonathan Vance\" is supported by \"Jonathan Vance, PharmD\" in the source.\n3. **reporter_type**: \"HCP - Pharmacist\" is supported by \"I am a staff pharmacist\" in the source.\n4. **contact_email**: \"jvance@bostonmed.org\" is supported by \"Email: jvance@bostonmed.org\" in the source.\n5. **contact_phone**: \"+16175550122\" is supported by \"Phone: 617-555-0122\" in the source, normalized to E.164 format.\n6. **country_code**: \"US\" is inferred from the Boston location and phone number area code.\n7. **language**: \"English\" is inferred from the English language of the document.\n8. **product_mentioned**: \"CholoClear-X\" is supported by \"your product CholoClear-X\" in the source.\n9. **target_package_insert_section**: \"Dosage and Administration\" is inferred from the context of the inquiry about dosage guidelines.\n10. **inquiry_summary_text**: The summary accurately reflects the inquiry about \"confirmation of the approved package insert ceiling guidelines for CholoClear-X standard adult hypercholesterolemia administration\" as described in the source.\n\nAll values are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "summary_accuracy",
+          "type": "score",
+          "score": 4,
+          "passed": true,
+          "threshold": 4,
+          "reasoning": "The summary accurately captures the main inquiry about confirming the approved package insert ceiling guidelines for CholoClear-X. However, it omits the specific context of the discrepancy between the physician's order (100mg) and the internal guidelines (50mg), which is important for understanding the urgency and reason for the inquiry."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_008",
+      "halted": false,
+      "predicted_class": "Adverse Event Report",
+      "gt_class": "Adverse Event Report",
+      "class_correct": true,
+      "ae_pred": true,
+      "ae_gt": true,
+      "confidence": 1.0,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "patient_initials",
+          "pass"
+        ],
+        [
+          "patient_age",
+          "fail"
+        ],
+        [
+          "patient_gender",
+          "pass"
+        ],
+        [
+          "onset_date",
+          "pass"
+        ],
+        [
+          "adverse_symptoms_list",
+          "semantic"
+        ],
+        [
+          "concomitant_medications_list",
+          "pass"
+        ],
+        [
+          "ae_seriousness",
+          "pass"
+        ],
+        [
+          "seriousness_rationale",
+          "nogt"
+        ],
+        [
+          "is_valid_icsr",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": false,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"St. Jude Heart & Vascular Center\" is supported by the document.\n2. **reporter_name**: \"Samuel Brennan\" is supported by \"Dr. Samuel Brennan, MD, FACC\".\n3. **reporter_type**: \"HCP - Physician\" is a legitimate derivation from \"Senior Attending Cardiologist\".\n4. **contact_email**: \"sbrennan@stjudeheart.org\" is supported by the document.\n5. **contact_phone**: \"+13125550177\" is a legitimate normalization of \"312-555-0177\".\n6. **country_code**: \"US\" is a legitimate inference from the Chicago, IL address.\n7. **language**: \"English\" is a legitimate inference as the document is written in English.\n8. **product_mentioned**: \"CholoClear-X\" is supported by the document.\n9. **patient_initials**: \"R.K.\" is supported by the document.\n10. **patient_age**: \"58-year-old\" is supported by the document.\n11. **patient_gender**: \"female\" is supported by the document.\n12. **adverse_symptoms_list**: All symptoms listed are supported by the document: \"severe upper airway throat swelling\", \"profound difficulty breathing\", \"widespread confluent urticarial hives\", \"critical hemodynamic blood pressure crash\".\n\nAll values in the extracted record are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "symptom_coverage",
+          "type": "passfail",
+          "passed": false,
+          "reasoning": "The document describes the following adverse symptoms experienced by the patient:\n1. Severe upper airway throat swelling\n2. Profound difficulty breathing\n3. Widespread confluent urticarial hives\n4. Critical hemodynamic blood pressure crash (anaphylactic shock)\n5. Severe respiratory distress\n\nThe extracted adverse_symptoms_list includes:\n- Severe upper airway throat swelling\n- Profound difficulty breathing\n- Widespread confluent urticarial hives\n- Critical hemodynamic blood pressure crash\n\nThe extracted list captures the first four symptoms accurately. However, it misses \"severe respiratory distress,\" which is explicitly mentioned in the document as part of the patient's clinical presentation. Therefore, there is a missed symptom, leading to a failure in recall."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_011",
+      "halted": true,
+      "terminal_pred": "Unreadable Queue",
+      "terminal_gt": "Unreadable Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "confidence": null,
+      "class_correct": null,
+      "ae_gt": null,
+      "ae_pred": null,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_012",
+      "halted": false,
+      "predicted_class": "On-Label Medical Inquiry",
+      "gt_class": "On-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 0.9,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "target_package_insert_section",
+          "pass"
+        ],
+        [
+          "inquiry_summary_text",
+          "semantic"
+        ],
+        [
+          "suggested_srd_match",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"St. Jude Clinical Pharmacy\" is supported by \"FROM: St. Jude Clinical Pharmacy Dept\".\n2. **reporter_name**: \"Sarah Jenkins\" is supported by \"REQUESTOR: Sarah Jenkins, RPh\".\n3. **reporter_type**: \"HCP - Pharmacist\" is supported by \"Sarah Jenkins, RPh (Lead Pharmacist)\".\n4. **contact_email**: \"s.jenkins@stjudehealth.org\" is supported by \"CONTACT EMAIL: s.jenkins@stjudehealth.org\".\n5. **contact_phone**: \"+19015550144\" is supported by \"Phone: 901-555-0144\" (normalized to E.164 format).\n6. **country_code**: \"US\" is inferred from the phone number area code \"901\" which is in the United States.\n7. **language**: \"English\" is inferred from the document being written in English.\n8. **product_mentioned**: \"CholoClear-X\" is supported by \"your commercial lipid-lowering tablet, CholoClear-X (50mg oral)\".\n9. **target_package_insert_section**: \"Dosage and Administration\" is supported by \"Please point us to the relevant Dosage and Administration section.\"\n10. **inquiry_summary_text**: The summary \"Sarah Jenkins is asking if the approved package insert for CholoClear-X supports titrating above 50mg per day for an adult patient.\" is supported by the message body which asks about titrating CholoClear-X above 50mg per day.\n\nAll values in the extracted record are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "summary_accuracy",
+          "type": "score",
+          "score": 4,
+          "passed": true,
+          "threshold": 4,
+          "reasoning": "The summary captures the main inquiry about whether the dosage can be increased above 50mg per day according to the approved package insert. However, it omits the context of the patient's condition (refractory hypercholesterolemia) and the specific dosages considered (75mg or 100mg). These details are relevant to fully understanding the inquiry."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_013",
+      "halted": false,
+      "predicted_class": "On-Label Medical Inquiry",
+      "gt_class": "On-Label Medical Inquiry",
+      "class_correct": null,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 0.8,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "target_package_insert_section",
+          "nogt"
+        ],
+        [
+          "inquiry_summary_text",
+          "nogt"
+        ],
+        [
+          "suggested_srd_match",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. customer_org: Cleveland Clinic - Supported by the document.\n2. reporter_name: Priya Nair - Supported by the document.\n3. reporter_type: HCP - Pharmacist - Supported by \"PharmD\" credential in the document.\n4. contact_email: p.nair@clevelandclinic.org - Supported by the document.\n5. contact_phone: +12165550133 - Supported by the document (normalized format).\n6. country_code: US - Inferred from Cleveland Clinic's location, supported.\n7. language: English - Supported by the document's language.\n8. product_mentioned: CholoClear-X - Supported by the document.\n9. target_package_insert_section: Other - Supported by the document mentioning \"How Supplied / Storage and Handling\".\n10. inquiry_summary_text: The inquiry is about the storage-stability of CholoClear-X tablets after exposure to high temperatures - Supported by the document's content.\n\nAll values are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "summary_accuracy",
+          "type": "score",
+          "score": 3,
+          "passed": false,
+          "threshold": 4,
+          "reasoning": "The summary captures the general topic of the inquiry, which is the storage-stability of CholoClear-X tablets after exposure to high temperatures. However, it omits the specific details about the temperature (40 degrees C), duration (30 hours), and the request for guidance on whether to quarantine and discard the bottle or if it is still acceptable for dispensing. These details are crucial to fully understanding the inquiry."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_014",
+      "halted": false,
+      "predicted_class": "Off-Label Medical Inquiry",
+      "gt_class": "Off-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 0.9,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "unapproved_demographic_flag",
+          "pass"
+        ],
+        [
+          "off_label_indication",
+          "semantic"
+        ],
+        [
+          "unsolicited_verification_flag",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"Metro Health Cardiovascular Group\" is mentioned in the source document.\n2. **reporter_name**: \"Keith Sorensen\" is mentioned in the source document.\n3. **reporter_type**: \"HCP - Physician\" is a legitimate derivation from \"Dr. Keith Sorensen\".\n4. **contact_email**: \"k.sorensen@metrocardio.org\" is mentioned in the source document.\n5. **contact_phone**: \"+12125550199\" is a normalized version of \"212-555-0199\".\n6. **country_code**: \"US\" can be inferred from the phone number area code \"212\".\n7. **language**: \"English\" is the language of the document.\n8. **product_mentioned**: \"CholoClear-X\" is mentioned in the source document.\n9. **off_label_indication**: \"titration to 75mg/day, above the approved 50mg ceiling\" is supported by the document's mention of \"75mg daily over a 4-week period\" and \"maximum approved maintenance dosage ceiling is explicitly capped at 50mg daily\".\n10. **unsolicited_verification_flag**: \"True\" is supported by the phrase \"This is an unsolicited inquiry\".\n\nAll values in the extracted record are supported by the source document. There are no hallucinations or contradictions."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_015",
+      "halted": false,
+      "predicted_class": "On-Label Medical Inquiry",
+      "gt_class": "On-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 0.8,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "target_package_insert_section",
+          "pass"
+        ],
+        [
+          "inquiry_summary_text",
+          "semantic"
+        ],
+        [
+          "suggested_srd_match",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"Cleveland Clinic Cardiovascular Center\" is explicitly mentioned in the source document.\n2. **reporter_name**: \"Olivia Bennett\" is explicitly mentioned in the source document.\n3. **reporter_type**: \"Nurse\" is inferred from \"BSN, RN\" which are nursing credentials, thus supported.\n4. **contact_email**: \"o.bennett@clevelandclinic.org\" is explicitly mentioned in the source document.\n5. **contact_phone**: \"+12165550188\" is a legitimate E.164 normalization of \"216-555-0188\" mentioned in the source document.\n6. **country_code**: \"US\" is inferred from the Cleveland Clinic's location, which is in the United States, thus supported.\n7. **language**: \"English\" is the language of the document, thus supported.\n8. **product_mentioned**: \"LipidShield-PRO\" is explicitly mentioned in the source document.\n9. **target_package_insert_section**: \"Dosage and Administration\" is a legitimate inference from the inquiry about \"standard initiation dosages\" and \"maintenance titration arm.\"\n10. **inquiry_summary_text**: The summary accurately reflects the inquiry about switching from a 20mg dose of LipidShield-PRO to a standard maintenance titration arm, as described in the source document.\n\nAll values are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "summary_accuracy",
+          "type": "score",
+          "score": 3,
+          "passed": false,
+          "threshold": 4,
+          "reasoning": "The summary captures the main inquiry about the protocol for switching from a 20mg dose of LipidShield-PRO to a standard maintenance titration arm. However, it omits the request for specific documentation, such as a clinical trial summary or consensus statement, which is an important aspect of the inquiry."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_016",
+      "halted": false,
+      "predicted_class": "On-Label Medical Inquiry",
+      "gt_class": "On-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "target_package_insert_section",
+          "pass"
+        ],
+        [
+          "inquiry_summary_text",
+          "semantic"
+        ],
+        [
+          "suggested_srd_match",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"Pacific Heart and Vascular Institute\" is explicitly mentioned in the source document.\n2. **reporter_name**: \"Evelyn Shaw\" is explicitly mentioned in the source document.\n3. **reporter_type**: \"HCP - Physician\" is a legitimate derivation from \"attending cardiologist\".\n4. **contact_email**: \"e.shaw@pacificheart.org\" is explicitly mentioned in the source document.\n5. **contact_phone**: \"+12065550191\" is a normalized version of \"206-555-0191\", which is explicitly mentioned.\n6. **country_code**: \"US\" is a legitimate inference from the Seattle location.\n7. **language**: \"English\" is a legitimate inference as the document is written in English.\n8. **product_mentioned**: \"CholoClear-X\" is explicitly mentioned in the source document.\n9. **target_package_insert_section**: \"Contraindications\" is explicitly mentioned in the context of the inquiry.\n10. **inquiry_summary_text**: The summary accurately reflects the inquiry about contraindications related to \"active hepatic disease or unexplained persistent elevations of serum transaminases\" as stated in the document.\n\nAll values are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "summary_accuracy",
+          "type": "score",
+          "score": 5,
+          "passed": true,
+          "threshold": 4,
+          "reasoning": "The summary accurately captures the main inquiry from Dr. Evelyn Shaw about whether CholoClear-X is contraindicated in patients with active hepatic disease or unexplained persistent elevations of serum transaminases. It includes the specific conditions she is inquiring about, which are the key aspects of her question."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_018",
+      "halted": false,
+      "predicted_class": "Out of scope",
+      "gt_class": "Out of scope",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "fail"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "fail"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "fail"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "fail"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": false,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org: Enterprise Health Solutions LLC** - This is supported by the document, which mentions \"Our team at Enterprise Health Solutions LLC.\"\n2. **reporter_name: .** - The document does not provide a specific name for the reporter, so a placeholder \".\" is acceptable.\n3. **reporter_type: Other** - The document does not specify a reporter type, but \"Other\" is a reasonable inference given the commercial nature of the message.\n4. **country_code: .** - The document does not provide any information about a country, so a placeholder \".\" is acceptable.\n5. **language: English** - The document is written in English, supporting this value.\n6. **product_mentioned: CholoClear-X** - The document mentions \"CholoClear-X,\" supporting this value.\n\nAll values in the extracted record are supported by the source document, with no hallucinations or contradictions."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_021",
+      "halted": false,
+      "predicted_class": "Adverse Event Report",
+      "gt_class": "Adverse Event Report",
+      "class_correct": true,
+      "ae_pred": true,
+      "ae_gt": true,
+      "confidence": 1.0,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "patient_initials",
+          "pass"
+        ],
+        [
+          "patient_age",
+          "pass"
+        ],
+        [
+          "patient_gender",
+          "pass"
+        ],
+        [
+          "onset_date",
+          "pass"
+        ],
+        [
+          "adverse_symptoms_list",
+          "semantic"
+        ],
+        [
+          "concomitant_medications_list",
+          "pass"
+        ],
+        [
+          "ae_seriousness",
+          "fail"
+        ],
+        [
+          "seriousness_rationale",
+          "nogt"
+        ],
+        [
+          "is_valid_icsr",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": false,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **reporter_name: Marcus Vance** - Supported by the signature in the email.\n2. **reporter_type: Consumer** - Inferred from the context of the email, as Marcus Vance is a patient discussing personal medication issues.\n3. **contact_phone: +15125550144** - Supported by the personal mobile number provided in the email, normalized to E.164 format.\n4. **country_code: US** - Inferred from the address \"Austin, TX,\" which is in the United States.\n5. **language: English** - The email is written in English, supporting this value.\n6. **product_mentioned: CholoClear-X** - Explicitly mentioned in the email.\n7. **patient_initials: M.V.** - Derived from the name Marcus Vance, which is supported by the email signature.\n8. **adverse_symptoms_list: ['strange burning sensation in my chest', 'irregular, racing heartbeat', 'feel quite dizzy']** - All symptoms are explicitly mentioned in the email.\n\nAll values in the extracted record are supported by the source document. There are no hallucinations or contradictions."
+        },
+        {
+          "grader": "symptom_coverage",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "The source document describes three adverse symptoms experienced by the patient: a strange burning sensation in the chest, an irregular, racing heartbeat, and feeling quite dizzy. The extracted adverse_symptoms_list includes all three symptoms: \"strange burning sensation in my chest,\" \"irregular, racing heartbeat,\" and \"feel quite dizzy.\" There are no additional symptoms in the list that are not mentioned in the document, and no symptoms from the document are missing in the list. Therefore, the extracted list accurately captures all the adverse symptoms described in the document without any invention."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_023",
+      "halted": false,
+      "predicted_class": "On-Label Medical Inquiry",
+      "gt_class": "On-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "Auto-Approve",
+      "terminal_gt": "Auto-Approve",
+      "terminal_correct": true,
+      "auto_approved": true,
+      "metadata_results": [
+        [
+          "customer_org",
+          "fail"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "fail"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "target_package_insert_section",
+          "pass"
+        ],
+        [
+          "inquiry_summary_text",
+          "semantic"
+        ],
+        [
+          "suggested_srd_match",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": false,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"Boston Medical Center Pharmacy Dept\" is supported by \"Boston Medical Center Pharmacy Dept\" in the document.\n2. **reporter_name**: \"Jonathan Vance\" is supported by \"Jonathan Vance, PharmD\" in the document.\n3. **reporter_type**: \"HCP - Pharmacist\" is supported by \"I am a staff pharmacist\" in the document.\n4. **contact_email**: \"jvance@bostonmed.org\" is supported by \"Email: jvance@bostonmed.org\" in the document.\n5. **contact_phone**: \"+16175550122\" is supported by \"Phone: 617-555-0122\" in the document, with normalization to E.164 format.\n6. **country_code**: \"US\" is inferred from the Boston location and phone number area code.\n7. **language**: \"English\" is inferred from the English language of the document.\n8. **product_mentioned**: \"CholoClear-X\" is supported by \"your product CholoClear-X\" in the document.\n9. **target_package_insert_section**: \"Dosage and Administration\" is supported by the context of the inquiry about dosage guidelines.\n10. **inquiry_summary_text**: The summary accurately reflects the inquiry about confirming dosage guidelines for CholoClear-X.\n\nAll values are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "summary_accuracy",
+          "type": "score",
+          "score": 4,
+          "passed": true,
+          "threshold": 4,
+          "reasoning": "The summary accurately captures the main inquiry about confirming the approved package insert ceiling guidelines for CholoClear-X. However, it omits the context of the discrepancy between the physician's order and the internal guidelines, which is an important aspect of the inquiry."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_024",
+      "halted": false,
+      "predicted_class": "On-Label Medical Inquiry",
+      "gt_class": "On-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 0.9,
+      "terminal_pred": "Auto-Approve",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": false,
+      "auto_approved": true,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "target_package_insert_section",
+          "pass"
+        ],
+        [
+          "inquiry_summary_text",
+          "semantic"
+        ],
+        [
+          "suggested_srd_match",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "fail"
+        ],
+        [
+          "routing_target",
+          "fail"
+        ]
+      ],
+      "record_fully_correct": false,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"Boston Medical Center\" is mentioned in the source document.\n2. **reporter_name**: \"Jonathan Vance\" is mentioned in the source document.\n3. **reporter_type**: \"HCP - Pharmacist\" is inferred from \"PharmD\" in the source document, which is a legitimate derivation.\n4. **contact_email**: \"jvance@bostonmed.org\" is mentioned in the source document.\n5. **contact_phone**: \"617-555-0122\" is mentioned in the source document and correctly normalized to \"+16175550122\".\n6. **country_code**: \"US\" is inferred from the Boston Medical Center address, which is in the United States.\n7. **language**: \"English\" is the language of the source document.\n8. **product_mentioned**: \"CholoClear-X\" is mentioned in the source document.\n9. **target_package_insert_section**: \"Drug Interactions\" is a legitimate inference from the inquiry about interactions with supplements or vitamins.\n10. **inquiry_summary_text**: The summary accurately reflects the content of the inquiry in the source document.\n\nAll values in the extracted record are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "summary_accuracy",
+          "type": "score",
+          "score": 5,
+          "passed": true,
+          "threshold": 4,
+          "reasoning": "The summary accurately captures the essence of the inquiry, which is about general guidance on taking CholoClear-X with over-the-counter supplements or vitamins. It correctly notes that the inquiry is not about specific interactions but general guidance, which is the main point of the original message."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_025",
+      "halted": false,
+      "predicted_class": "Adverse Event Report",
+      "gt_class": "Adverse Event Report",
+      "class_correct": true,
+      "ae_pred": true,
+      "ae_gt": true,
+      "confidence": 1.0,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "fail"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "fail"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "patient_initials",
+          "pass"
+        ],
+        [
+          "patient_age",
+          "fail"
+        ],
+        [
+          "patient_gender",
+          "pass"
+        ],
+        [
+          "onset_date",
+          "pass"
+        ],
+        [
+          "adverse_symptoms_list",
+          "semantic"
+        ],
+        [
+          "concomitant_medications_list",
+          "pass"
+        ],
+        [
+          "ae_seriousness",
+          "pass"
+        ],
+        [
+          "seriousness_rationale",
+          "nogt"
+        ],
+        [
+          "is_valid_icsr",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": false,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"Riverside Hepatology Associates\" is mentioned in the source document.\n2. **reporter_name**: \"Nathan Cole\" is mentioned in the source document.\n3. **reporter_type**: \"HCP - Physician\" is a legitimate derivation from \"MD\" in the source document.\n4. **contact_email**: \"ncole@riversidehep.org\" is mentioned in the source document.\n5. **contact_phone**: \"+14155550188\" is a legitimate normalization of \"415-555-0188\" in the source document.\n6. **country_code**: The value is \".\", which is not a hallucination.\n7. **language**: \"English\" is a reasonable inference given the document is written in English.\n8. **product_mentioned**: \"CholoClear-X\" is mentioned in the source document.\n9. **patient_age**: \"64-year-old\" is mentioned in the source document.\n10. **patient_gender**: \"male\" is mentioned in the source document.\n11. **adverse_symptoms_list**: ['progressive jaundice', 'dark urine', 'severe right-upper-quadrant pain'] are all mentioned in the source document.\n12. **concomitant_medications_list**: ['lisinopril'] is mentioned in the source document.\n\nAll values in the extracted record are supported by the source document. There are no hallucinations or contradictions."
+        },
+        {
+          "grader": "symptom_coverage",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "The source document describes the following adverse symptoms experienced by the patient: progressive jaundice, dark urine, and severe right-upper-quadrant pain. These symptoms are all captured in the extracted adverse_symptoms_list. There are no additional symptoms mentioned in the document that are missing from the list, and no symptoms in the list that are not mentioned in the document. Therefore, the extracted list accurately reflects the symptoms described in the document."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_026",
+      "halted": false,
+      "predicted_class": "Adverse Event Report",
+      "gt_class": "Adverse Event Report",
+      "class_correct": true,
+      "ae_pred": true,
+      "ae_gt": true,
+      "confidence": 0.9,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "patient_initials",
+          "pass"
+        ],
+        [
+          "patient_age",
+          "pass"
+        ],
+        [
+          "patient_gender",
+          "pass"
+        ],
+        [
+          "onset_date",
+          "pass"
+        ],
+        [
+          "adverse_symptoms_list",
+          "semantic"
+        ],
+        [
+          "concomitant_medications_list",
+          "pass"
+        ],
+        [
+          "ae_seriousness",
+          "pass"
+        ],
+        [
+          "seriousness_rationale",
+          "nogt"
+        ],
+        [
+          "is_valid_icsr",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **reporter_name: Diane Foster** - Supported by the document, as the email is signed by Diane Foster.\n2. **reporter_type: Consumer** - Supported by the document, as the email is from a personal email address and describes personal experience with the medication.\n3. **contact_email: diane.foster88@gmail.com** - Supported by the document, as it is explicitly mentioned.\n4. **contact_phone: +15035550173** - Supported by the document, as the phone number is given and correctly normalized to E.164 format.\n5. **country_code: US** - Supported by the document, as the phone number area code (503) is from the United States.\n6. **language: English** - Supported by the document, as the email is written in English.\n7. **product_mentioned: CholoClear-X** - Supported by the document, as the product is explicitly mentioned.\n8. **patient_initials: D.F.** - Supported by the document, as the initials match the name Diane Foster.\n9. **adverse_symptoms_list: ['mild muscle aches in my legs and shoulders']** - Supported by the document, as the symptoms are described in the email.\n\nAll values in the extracted record are supported by the source document. There are no hallucinations or contradictions."
+        },
+        {
+          "grader": "symptom_coverage",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "The source document describes the patient experiencing \"mild muscle aches in my legs and shoulders.\" The extracted adverse_symptoms_list correctly captures this as \"mild muscle aches in my legs and shoulders.\" There are no additional symptoms mentioned in the document that are missing from the list, and the list does not include any symptoms not present in the document. Therefore, the extracted list is complete and accurate."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_027",
+      "halted": false,
+      "predicted_class": "Adverse Event Report",
+      "gt_class": "Adverse Event Report",
+      "class_correct": true,
+      "ae_pred": true,
+      "ae_gt": true,
+      "confidence": 1.0,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "fail"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "fail"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "patient_initials",
+          "pass"
+        ],
+        [
+          "patient_age",
+          "pass"
+        ],
+        [
+          "patient_gender",
+          "pass"
+        ],
+        [
+          "onset_date",
+          "pass"
+        ],
+        [
+          "adverse_symptoms_list",
+          "semantic"
+        ],
+        [
+          "concomitant_medications_list",
+          "pass"
+        ],
+        [
+          "ae_seriousness",
+          "pass"
+        ],
+        [
+          "seriousness_rationale",
+          "nogt"
+        ],
+        [
+          "is_valid_icsr",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": false,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. customer_org: \"Cornerstone Community Pharmacy\" is supported by the source document where Gregory Pratt mentions his affiliation.\n2. reporter_name: \"Gregory Pratt\" is supported by the signature in the email.\n3. reporter_type: \"HCP - Pharmacist\" is supported by Gregory Pratt's credentials \"RPh\" and his statement \"I'm a community pharmacist.\"\n4. contact_email: \"gpratt@cornerstonerx.com\" is supported by the email provided in the source document.\n5. language: \"English\" is a legitimate derivation as the entire document is in English.\n6. product_mentioned: \"CholoClear-X\" is mentioned in the context of the adverse reaction.\n7. adverse_symptoms_list: ['significant facial and lip swelling'] is directly supported by the description of the symptoms in the email.\n\nAll values in the extracted record are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "symptom_coverage",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "The source document describes the adverse symptoms experienced by the customer as \"significant facial and lip swelling.\" The extracted adverse_symptoms_list includes \"significant facial and lip swelling,\" which matches exactly with the symptoms described in the document. There are no additional symptoms in the document that are missing from the list, and no symptoms in the list that are not present in the document. Therefore, the extracted list is complete and accurate."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_028",
+      "halted": false,
+      "predicted_class": "Adverse Event Report",
+      "gt_class": "Adverse Event Report",
+      "class_correct": true,
+      "ae_pred": true,
+      "ae_gt": true,
+      "confidence": 1.0,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "patient_initials",
+          "pass"
+        ],
+        [
+          "patient_age",
+          "fail"
+        ],
+        [
+          "patient_gender",
+          "pass"
+        ],
+        [
+          "onset_date",
+          "pass"
+        ],
+        [
+          "adverse_symptoms_list",
+          "semantic"
+        ],
+        [
+          "concomitant_medications_list",
+          "pass"
+        ],
+        [
+          "ae_seriousness",
+          "pass"
+        ],
+        [
+          "seriousness_rationale",
+          "nogt"
+        ],
+        [
+          "is_valid_icsr",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": false,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. customer_org: \"Lakeside Cardiology Institute\" is supported by the document.\n2. reporter_name: \"Maria Santos\" is supported by the document.\n3. reporter_type: \"HCP - Physician\" is supported by \"MD, FACC\" in the document.\n4. contact_email: \"msantos@lakesidecardio.org\" is supported by the document.\n5. contact_phone: \"+13125550166\" is supported by the document (normalized from \"312-555-0166\").\n6. country_code: \"US\" is inferred from the phone number and email domain, which are consistent with US formats.\n7. language: \"English\" is supported as the document is written in English.\n8. product_mentioned: \"CholoClear-X\" is supported by the document.\n9. patient_age: \"72-year-old\" is supported by the document.\n10. patient_gender: \"female\" is supported by the document.\n11. adverse_symptoms_list: ['palpitations', 'lightheadedness'] are both mentioned in the document.\n12. concomitant_medications_list: ['metoprolol', 'apixaban'] are both mentioned in the document.\n\nAll values in the extracted record are supported by the source document. There are no hallucinations or contradictions."
+        },
+        {
+          "grader": "symptom_coverage",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "The document describes two adverse symptoms experienced by the patient: 'palpitations' and 'lightheadedness'. These are both included in the extracted adverse_symptoms_list. There are no additional symptoms mentioned in the document, and the list does not contain any symptoms not present in the document. Therefore, the extracted list accurately captures all the symptoms described in the source document without any omissions or inventions."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_029",
+      "halted": false,
+      "predicted_class": "On-Label Medical Inquiry",
+      "gt_class": "On-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "Auto-Approve",
+      "terminal_gt": "Auto-Approve",
+      "terminal_correct": true,
+      "auto_approved": true,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "target_package_insert_section",
+          "pass"
+        ],
+        [
+          "inquiry_summary_text",
+          "semantic"
+        ],
+        [
+          "suggested_srd_match",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. customer_org: Cleveland Clinic - Supported by \"Cleveland Clinic\" in the document.\n2. reporter_name: Priya Nair - Supported by \"Priya Nair, PharmD\" in the document.\n3. reporter_type: HCP - Pharmacist - Supported by \"clinical pharmacist\" in the document.\n4. contact_email: pnair@clevelandclinic.org - Supported by \"Email: pnair@clevelandclinic.org\" in the document.\n5. contact_phone: +12165550140 - Supported by \"Phone: 216-555-0140\" in the document, normalized to E.164 format.\n6. country_code: US - Inferred from the Cleveland Clinic location, which is in the US.\n7. language: English - The document is written in English.\n8. product_mentioned: CholoClear-X - Supported by \"CholoClear-X\" in the document.\n9. target_package_insert_section: Contraindications - Supported by the inquiry about contraindications in the document.\n10. inquiry_summary_text: The reporter is asking if CholoClear-X is contraindicated in patients with active hepatic disease or persistently elevated serum transaminases. - Supported by the inquiry text in the document.\n\nAll values are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "summary_accuracy",
+          "type": "score",
+          "score": 5,
+          "passed": true,
+          "threshold": 4,
+          "reasoning": "The extracted summary accurately captures the main inquiry about whether CholoClear-X is contraindicated in patients with active hepatic disease or persistently elevated serum transaminases. It does not omit any critical details from the original inquiry."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_030",
+      "halted": false,
+      "predicted_class": "On-Label Medical Inquiry",
+      "gt_class": "On-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "Auto-Approve",
+      "terminal_gt": "Auto-Approve",
+      "terminal_correct": true,
+      "auto_approved": true,
+      "metadata_results": [
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "pass"
+        ],
+        [
+          "reporter_name",
+          "pass"
+        ],
+        [
+          "reporter_type",
+          "pass"
+        ],
+        [
+          "contact_email",
+          "pass"
+        ],
+        [
+          "contact_phone",
+          "pass"
+        ],
+        [
+          "country_code",
+          "pass"
+        ],
+        [
+          "language",
+          "pass"
+        ],
+        [
+          "product_mentioned",
+          "pass"
+        ],
+        [
+          "target_package_insert_section",
+          "pass"
+        ],
+        [
+          "inquiry_summary_text",
+          "semantic"
+        ],
+        [
+          "suggested_srd_match",
+          "pass"
+        ],
+        [
+          "catalog_match_result",
+          "pass"
+        ],
+        [
+          "hcp_system_id",
+          "pass"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"St. Jude Research Hospital\" is mentioned in the source document.\n2. **reporter_name**: \"Aris Thorne\" is mentioned in the source document.\n3. **reporter_type**: \"HCP - Physician\" is a legitimate derivation from \"MD, PhD\" in the source document.\n4. **contact_email**: \"athorne@stjude.org\" is mentioned in the source document.\n5. **contact_phone**: \"+19015550151\" is a normalized version of \"901-555-0151\" in the source document.\n6. **country_code**: \"US\" can be inferred from the phone number area code \"901\" which is in the United States.\n7. **language**: \"English\" is the language of the source document.\n8. **product_mentioned**: \"CholoClear-X\" is mentioned in the source document.\n9. **target_package_insert_section**: \"Drug Interactions\" is a reasonable inference from the inquiry about \"interaction or dose-adjustment guidance.\"\n10. **inquiry_summary_text**: The summary accurately reflects the inquiry in the source document.\n\nAll values in the extracted record are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "summary_accuracy",
+          "type": "score",
+          "score": 5,
+          "passed": true,
+          "threshold": 4,
+          "reasoning": "The extracted summary accurately captures the main inquiry about interaction or dose-adjustment guidance for co-administration of CholoClear-X with strong CYP3A4 inhibitors. It includes all necessary details without omitting any critical information from the original inquiry."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_031",
+      "halted": false,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "predicted_class": "Standard Response Request",
+      "gt_class": "Standard Response Request",
+      "class_correct": true,
+      "auto_approved": false,
+      "confidence": 1.0,
+      "ae_gt": false,
+      "ae_pred": false,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_032",
+      "halted": false,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "predicted_class": "Standard Response Request",
+      "gt_class": "Standard Response Request",
+      "class_correct": true,
+      "auto_approved": false,
+      "confidence": 0.9,
+      "ae_gt": false,
+      "ae_pred": false,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_033",
+      "halted": false,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "predicted_class": "Expanded Access / Compassionate Use",
+      "gt_class": "Expanded Access / Compassionate Use",
+      "class_correct": true,
+      "auto_approved": false,
+      "confidence": 1.0,
+      "ae_gt": false,
+      "ae_pred": false,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_034",
+      "halted": false,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "predicted_class": "Expanded Access / Compassionate Use",
+      "gt_class": "Expanded Access / Compassionate Use",
+      "class_correct": true,
+      "auto_approved": false,
+      "confidence": 1.0,
+      "ae_gt": false,
+      "ae_pred": false,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_035",
+      "halted": false,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "predicted_class": "Investigator-Initiated Trial Proposal",
+      "gt_class": "Investigator-Initiated Trial Proposal",
+      "class_correct": true,
+      "auto_approved": false,
+      "confidence": 1.0,
+      "ae_gt": false,
+      "ae_pred": false,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_036",
+      "halted": false,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "predicted_class": "Investigator-Initiated Trial Proposal",
+      "gt_class": "Investigator-Initiated Trial Proposal",
+      "class_correct": true,
+      "auto_approved": false,
+      "confidence": 1.0,
+      "ae_gt": false,
+      "ae_pred": false,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_037",
+      "halted": false,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "predicted_class": "Product Quality Complaint",
+      "gt_class": "Product Quality Complaint",
+      "class_correct": true,
+      "auto_approved": false,
+      "confidence": 1.0,
+      "ae_gt": false,
+      "ae_pred": false,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_038",
+      "halted": false,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "confidence": null,
+      "class_correct": null,
+      "ae_gt": false,
+      "ae_pred": null,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_039",
+      "halted": false,
+      "predicted_class": "Legal / Regulatory Authority Correspondence",
+      "gt_class": "Legal / Regulatory Authority Correspondence",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org: U.S. FDA** - Supported by the document, which mentions \"U.S. FOOD AND DRUG ADMINISTRATION\".\n2. **reporter_name: .** - The document does not provide a specific name, so a placeholder is acceptable.\n3. **reporter_type: Other** - The document does not specify a reporter type, but \"Other\" is a reasonable inference given the context of a regulatory body.\n4. **country_code: US** - Supported by the document, which references the \"U.S. FOOD AND DRUG ADMINISTRATION\".\n5. **language: English** - The document is written in English, supporting this value.\n6. **product_mentioned: CholoClear-X** - Supported by the document, which mentions \"CholoClear-X\".\n\nAll values are supported by the source document, with no hallucinations or contradictions."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_040",
+      "halted": false,
+      "predicted_class": "Legal / Regulatory Authority Correspondence",
+      "gt_class": "Legal / Regulatory Authority Correspondence",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org: National Medicines Regulatory Authority** - This value is supported by the source document, which mentions \"National Medicines Regulatory Authority.\"\n\n2. **reporter_name: .** - The source document does not provide a specific name, so a value of \".\" is acceptable as it indicates no name was given.\n\n3. **reporter_type: Other** - The source document is from the \"MINISTRY OF HEALTH \u2014 Pharmaceutical Inspectorate,\" which can be reasonably inferred as a governmental or regulatory body, supporting the classification as \"Other.\"\n\n4. **country_code: .** - The source document does not specify a country, so a value of \".\" is acceptable as it indicates no country was given.\n\n5. **language: English** - The source document is written in English, supporting this value.\n\n6. **product_mentioned: CholoClear-X Injectable** - This value is directly supported by the source document, which mentions \"CholoClear-X Injectable.\"\n\nAll values in the extracted record are supported by the source document, with no hallucinations or contradictions."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_041",
+      "halted": false,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "confidence": null,
+      "class_correct": null,
+      "ae_gt": true,
+      "ae_pred": null,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_042",
+      "halted": false,
+      "predicted_class": "Off-Label Medical Inquiry",
+      "gt_class": "Off-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 0.9,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "unapproved_demographic_flag",
+          "nogt"
+        ],
+        [
+          "off_label_indication",
+          "nogt"
+        ],
+        [
+          "unsolicited_verification_flag",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org**: \"Pediatric Cardiology, Denver Children's\" is directly supported by the field [Organization] in the source document.\n2. **reporter_name**: \"Lena Fischer\" is supported by the field [Requester] \"Dr. Lena Fischer, MD\" in the source document.\n3. **reporter_type**: \"HCP - Physician\" is a legitimate derivation from \"Dr. Lena Fischer, MD\" indicating a healthcare professional and physician.\n4. **language**: \"English\" is not explicitly stated in the source document, but it is reasonable to infer given the document is in English.\n5. **product_mentioned**: \"CholoClear-X\" is directly supported by the field [Product] in the source document.\n6. **unapproved_demographic_flag**: \"Pediatric under 12\" is supported by the question about the use of CholoClear-X for a \"9-year-old child,\" which is under 12.\n7. **off_label_indication**: \"use of CholoClear-X in children under 12 with familial hypercholesterolemia\" is supported by the question asking about the starting dose for a 9-year-old with familial hypercholesterolemia, indicating off-label use.\n8. **unsolicited_verification_flag**: \"True\" is supported by the nature of the question, which is unsolicited as it seeks information not covered by the label.\n\nAll values are supported by the source document, with no hallucinations or contradictions."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_043",
+      "halted": false,
+      "predicted_class": "Off-Label Medical Inquiry",
+      "gt_class": "Off-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 0.9,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "unapproved_demographic_flag",
+          "nogt"
+        ],
+        [
+          "off_label_indication",
+          "nogt"
+        ],
+        [
+          "unsolicited_verification_flag",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **reporter_name: Owen Br###** - Supported by \"Dr. Owen Br###, MD\" in the source.\n2. **reporter_type: HCP - Physician** - Supported by \"Dr.\" and \"MD\" in the source, indicating a healthcare professional and physician.\n3. **country_code: US** - Supported by \"Portland, OR,\" which is in the United States.\n4. **language: English** - Supported by the email being written in English.\n5. **product_mentioned: CholoClear-X** - Supported by \"CholoClear-X\" in the source.\n6. **unapproved_demographic_flag: Pediatric under 12** - Supported by \"pediatric\" and \"young patients\" in the context of off-label use, implying under 12.\n7. **off_label_indication: pediatric migraine prophylaxis** - Supported by \"pediatric migraine prophylaxis\" in the source.\n8. **unsolicited_verification_flag: True** - Supported by the context of the email, which is a request for information not prompted by the company.\n\nAll values are directly supported by the source document, with no hallucinations or contradictions."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_044",
+      "halted": false,
+      "predicted_class": "Adverse Event Report",
+      "gt_class": "Adverse Event Report",
+      "class_correct": true,
+      "ae_pred": true,
+      "ae_gt": true,
+      "confidence": 0.9,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "patient_initials",
+          "nogt"
+        ],
+        [
+          "patient_age",
+          "nogt"
+        ],
+        [
+          "patient_gender",
+          "nogt"
+        ],
+        [
+          "onset_date",
+          "nogt"
+        ],
+        [
+          "adverse_symptoms_list",
+          "nogt"
+        ],
+        [
+          "concomitant_medications_list",
+          "nogt"
+        ],
+        [
+          "ae_seriousness",
+          "nogt"
+        ],
+        [
+          "seriousness_rationale",
+          "nogt"
+        ],
+        [
+          "is_valid_icsr",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. customer_org: 'Greenfield Family Practice' is supported by the document.\n2. reporter_name: 'Carmen Ruiz' is supported by the document.\n3. reporter_type: 'HCP - Physician' is supported by the document as Dr. Carmen Ruiz is mentioned with 'MD', indicating a physician.\n4. language: 'English' is supported as the document is written in English.\n5. product_mentioned: 'CholoClear-X' is supported by the document.\n6. patient_gender: 'female' is supported by the document as the patient is referred to as 'she'.\n7. adverse_symptoms_list: ['dizzy', 'a bit lightheaded'] is supported by the document as it mentions the patient felt 'dizzy and a bit lightheaded'.\n\nAll values in the extracted record are supported by the source document. There are no hallucinations or contradictions."
+        },
+        {
+          "grader": "symptom_coverage",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "The source document mentions two adverse symptoms experienced by the patient: \"dizzy\" and \"a bit lightheaded.\" The extracted adverse_symptoms_list includes both of these symptoms: \"dizzy\" and \"a bit lightheaded.\" There are no additional symptoms in the document that are missing from the list, and there are no symptoms in the list that are not present in the document. Therefore, the extracted list accurately captures all adverse symptoms mentioned in the document without any omissions or inventions."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_045",
+      "halted": false,
+      "predicted_class": "Adverse Event Report",
+      "gt_class": "Adverse Event Report",
+      "class_correct": true,
+      "ae_pred": true,
+      "ae_gt": true,
+      "confidence": 0.9,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "patient_initials",
+          "nogt"
+        ],
+        [
+          "patient_age",
+          "nogt"
+        ],
+        [
+          "patient_gender",
+          "nogt"
+        ],
+        [
+          "onset_date",
+          "nogt"
+        ],
+        [
+          "adverse_symptoms_list",
+          "nogt"
+        ],
+        [
+          "concomitant_medications_list",
+          "nogt"
+        ],
+        [
+          "ae_seriousness",
+          "nogt"
+        ],
+        [
+          "seriousness_rationale",
+          "nogt"
+        ],
+        [
+          "is_valid_icsr",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. reporter_name: Sandra Mills - Supported by the document, as the email is signed by Sandra Mills.\n2. reporter_type: Consumer - Supported by the document, as Sandra Mills identifies herself as the patient, indicating she is a consumer.\n3. language: English - Supported by the document, as the email is written in English.\n4. product_mentioned: ArthriFree - Supported by the document, as the product mentioned is ArthriFree.\n5. patient_initials: S.M. - Supported by the document, as the patient's name is Sandra Mills, which corresponds to the initials S.M.\n6. adverse_symptoms_list: ['red, raised, itchy rash'] - Supported by the document, as the symptoms described are a red, raised, itchy rash.\n\nAll values in the extracted record are supported by the source document. There are no hallucinations or contradictions."
+        },
+        {
+          "grader": "symptom_coverage",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "The source document describes a single adverse symptom: a \"red, raised, itchy rash\" that developed on the patient's forearm after the medication sprayed onto her skin. The extracted adverse_symptoms_list correctly captures this symptom as \"red, raised, itchy rash.\" There are no additional symptoms mentioned in the document, and the extracted list does not include any invented symptoms. Therefore, the extracted list is complete and accurate."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_046",
+      "halted": false,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "confidence": null,
+      "class_correct": null,
+      "ae_gt": true,
+      "ae_pred": null,
+      "record_fully_correct": null,
+      "metadata_results": [],
+      "all_results": [],
+      "graders": []
+    },
+    {
+      "case_id": "VAULT_EVAL_047",
+      "halted": false,
+      "predicted_class": "Adverse Event Report",
+      "gt_class": "Adverse Event Report",
+      "class_correct": true,
+      "ae_pred": true,
+      "ae_gt": true,
+      "confidence": 1.0,
+      "terminal_pred": "PV Queue",
+      "terminal_gt": "PV Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "patient_initials",
+          "nogt"
+        ],
+        [
+          "patient_age",
+          "nogt"
+        ],
+        [
+          "patient_gender",
+          "nogt"
+        ],
+        [
+          "onset_date",
+          "nogt"
+        ],
+        [
+          "adverse_symptoms_list",
+          "nogt"
+        ],
+        [
+          "concomitant_medications_list",
+          "nogt"
+        ],
+        [
+          "ae_seriousness",
+          "nogt"
+        ],
+        [
+          "seriousness_rationale",
+          "nogt"
+        ],
+        [
+          "is_valid_icsr",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **reporter_type: Consumer** - The source document is an email from a consumer (the person reporting is the spouse of the patient), which supports the value.\n2. **country_code: null** - The source document does not mention any country, so a null value is appropriate and not a hallucination.\n3. **language: English** - The email is written in English, supporting this value.\n4. **product_mentioned: CholoClear-X** - The product \"CholoClear-X\" is explicitly mentioned in the source document.\n5. **adverse_symptoms_list: ['vomited blood']** - The symptom \"vomited blood\" is directly mentioned in the source document.\n\nAll values in the extracted record are supported by the source document, with no hallucinations or contradictions."
+        },
+        {
+          "grader": "symptom_coverage",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "The source document describes the adverse symptom of \"vomited blood\" experienced by the patient's husband. The extracted adverse_symptoms_list correctly includes \"vomited blood,\" which matches the symptom described in the document. There are no additional symptoms mentioned in the document, and the extracted list does not include any symptoms not present in the document. Therefore, the extraction is complete and accurate."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_048",
+      "halted": false,
+      "predicted_class": "Public Health / FAQ Deflection",
+      "gt_class": "Public Health / FAQ Deflection",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. reporter_name: \"A patient\" - This is supported by the document as the message is signed \"\u2014 A patient\".\n2. reporter_type: \"Consumer\" - This is a legitimate derivation as the message is from \"A patient\", indicating a consumer rather than a healthcare professional.\n3. language: \"English\" - The entire message is written in English, supporting this value.\n4. product_mentioned: \"CholoClear-X\" - The product \"CholoClear-X\" is explicitly mentioned in the message.\n\nAll values are supported by the source document, with no hallucinations or contradictions."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_049",
+      "halted": false,
+      "predicted_class": "Off-Label Medical Inquiry",
+      "gt_class": "Off-Label Medical Inquiry",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "unapproved_demographic_flag",
+          "nogt"
+        ],
+        [
+          "off_label_indication",
+          "nogt"
+        ],
+        [
+          "unsolicited_verification_flag",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **reporter_name**: The value is '.' which is empty and thus not a hallucination.\n2. **reporter_type**: 'HCP - Physician' is inferred from the context of the question, which involves prescribing medication, a task typically performed by a healthcare professional such as a physician.\n3. **country_code**: The value is '.' which is empty and thus not a hallucination.\n4. **language**: 'English' is supported as the document is written in English.\n5. **product_mentioned**: 'CholoClear-X' is explicitly mentioned in the source document.\n6. **unapproved_demographic_flag**: 'Pediatric under 12' is supported as the patient is a 9-year-old, which is under 12.\n7. **off_label_indication**: 'prescribing CholoClear-X at 100mg to a 9-year-old' is directly supported by the source document, which mentions prescribing 100mg to a 9-year-old.\n8. **unsolicited_verification_flag**: 'True' is supported as the question is unsolicited, asking for advice on prescribing contrary to the label instructions.\n\nAll values are supported by the source document, with no hallucinations or contradictions."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_050",
+      "halted": false,
+      "predicted_class": "Legal / Regulatory Authority Correspondence",
+      "gt_class": "Out of scope",
+      "class_correct": false,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "fail"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "fail"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": false,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": false,
+          "reasoning": "The extracted record contains the following values:\n\n1. reporter_name: .\n2. reporter_type: Other\n3. country_code: .\n4. language: English\n\nCross-referencing these values with the source document:\n\n- reporter_name: . - The source document does not provide any specific name, so a value of '.' is acceptable as it indicates no name was extracted.\n- reporter_type: Other - The source document does not specify any reporter type, so this value is unsupported and considered a hallucination.\n- country_code: . - The source document does not provide any country code, so a value of '.' is acceptable as it indicates no country code was extracted.\n- language: English - The source document is written in English, so this value is supported.\n\nSince the value for 'reporter_type' is not supported by the source document, it is considered a hallucination. Therefore, the extracted record does not pass the faithfulness check."
+        }
+      ]
+    },
+    {
+      "case_id": "VAULT_EVAL_051",
+      "halted": false,
+      "predicted_class": "Out of scope",
+      "gt_class": "Out of scope",
+      "class_correct": true,
+      "ae_pred": false,
+      "ae_gt": false,
+      "confidence": 1.0,
+      "terminal_pred": "MIS Queue",
+      "terminal_gt": "MIS Queue",
+      "terminal_correct": true,
+      "auto_approved": false,
+      "metadata_results": [
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ]
+      ],
+      "all_results": [
+        [
+          "predicted_class",
+          "pass"
+        ],
+        [
+          "adverse_event_flag",
+          "pass"
+        ],
+        [
+          "out_of_scope",
+          "pass"
+        ],
+        [
+          "customer_org",
+          "nogt"
+        ],
+        [
+          "reporter_name",
+          "nogt"
+        ],
+        [
+          "reporter_type",
+          "nogt"
+        ],
+        [
+          "contact_email",
+          "nogt"
+        ],
+        [
+          "contact_phone",
+          "nogt"
+        ],
+        [
+          "country_code",
+          "nogt"
+        ],
+        [
+          "language",
+          "nogt"
+        ],
+        [
+          "product_mentioned",
+          "nogt"
+        ],
+        [
+          "catalog_match_result",
+          "nogt"
+        ],
+        [
+          "hcp_system_id",
+          "nogt"
+        ],
+        [
+          "record_status",
+          "pass"
+        ],
+        [
+          "routing_target",
+          "pass"
+        ]
+      ],
+      "record_fully_correct": true,
+      "graders": [
+        {
+          "grader": "faithfulness",
+          "type": "passfail",
+          "passed": true,
+          "reasoning": "1. **customer_org: Lakeside Internal Medicine** - This is supported by the source document, which states \"Lakeside Internal Medicine.\"\n2. **reporter_name: Aaron Webb** - This is supported by the source document, which states \"Dr. Aaron Webb, MD.\"\n3. **reporter_type: HCP - Physician** - This is a legitimate derivation. The document states \"Dr. Aaron Webb, MD,\" which supports the inference that the reporter is a healthcare professional (HCP) and a physician.\n4. **language: English** - The email is written in English, supporting this value.\n5. **product_mentioned: LipidShield-PRO** - The product \"LipidShield-PRO\" is mentioned in the source document.\n\nAll values in the extracted record are supported by the source document. There are no hallucinations or contradictions."
+        }
+      ]
+    }
+  ],
+  "model": "gpt-4o",
+  "ae_extract_version": "extract_v7",
+  "cost": {
+    "latency_s": 366.5,
+    "latency_per_case": 9.4,
+    "input_tokens": 156652,
+    "output_tokens": 24426,
+    "est_usd": 0.6359,
+    "est_usd_per_case": 0.0163
+  },
+  "criteria": [
+    {
+      "name": "AE recall (hard floor)",
+      "value": 1.0,
+      "target": 1.0,
+      "pass": true
+    },
+    {
+      "name": "Classification accuracy",
+      "value": 0.9705882352941176,
+      "target": 0.9,
+      "pass": true
+    },
+    {
+      "name": "Auto-approve precision",
+      "value": 0.4,
+      "target": 0.99,
+      "pass": false
+    },
+    {
+      "name": "Faithfulness (no hallucination)",
+      "value": 0.9642857142857143,
+      "target": 1.0,
+      "pass": false
+    },
+    {
+      "name": "Symptom coverage (AE)",
+      "value": 0.8888888888888888,
+      "target": 1.0,
+      "pass": false
+    },
+    {
+      "name": "Metadata draft accuracy",
+      "value": 0.9545454545454546,
+      "target": 0.95,
+      "pass": true
+    }
+  ]
+}
