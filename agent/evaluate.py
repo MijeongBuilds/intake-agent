@@ -76,15 +76,18 @@ def run_case(input_text: str, input_metadata: dict, model: str = MODEL,
         common, record = extract(input_text, classification, input_metadata, model=model,
                                  ae_extract_version=ae_extract_version)
         gates = evaluate_gates(classification, common, record, input_metadata, tenant_id)
-    except NotImplementedError:
+    except NotImplementedError as e:
         # The predicted class has no automated extractor yet -> fail SAFE to a human (MIS),
-        # never crash. (Classification succeeded; we just don't auto-build a record for this class.)
+        # never crash. (Classification succeeded; we just don't auto-build a record for this
+        # class.) The common metadata extracted before the dispatch is KEPT — the reviewer
+        # still gets reporter/product/contact pre-filled; only the record stays manual.
+        unbuilt_common = getattr(e, "common", None)
         return {
             "halted": False,
             "unbuilt_class": True,
             "readability": readability,
             "classification": classification.model_dump(mode="json") if classification is not None else None,
-            "common": None,
+            "common": unbuilt_common.model_dump(mode="json") if unbuilt_common is not None else None,
             "record": None,
             "record_type": None,
             "gates": {

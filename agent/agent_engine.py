@@ -238,6 +238,19 @@ def _extract_ae(document_text: str, classification: ClassifierOutput,
 NO_RECORD_CLASSES = {DocClass.LEGAL_REG, DocClass.PUBLIC_FAQ, DocClass.OUT_OF_SCOPE}
 
 
+class UnbuiltClassError(NotImplementedError):
+    """The predicted class has no automated record extractor yet.
+
+    Subclasses NotImplementedError (existing fail-safe catches keep working) and
+    carries the already-extracted CommonMetadata, so the human still gets the
+    reporter/product/contact pre-filled — only the class-specific record stays manual.
+    """
+
+    def __init__(self, message: str, common=None):
+        super().__init__(message)
+        self.common = common
+
+
 def extract_record(document_text: str, classification: ClassifierOutput,
                    tenant_id: str, model: str = MODEL,
                    ae_extract_version: Optional[str] = None) -> Optional[TransactionalRecord]:
@@ -270,8 +283,15 @@ def extract(document_text: str, classification: ClassifierOutput,
     AE-extract prompt variant (Compare/Sweep); None = current.
     """
     common = extract_metadata(document_text, input_metadata, model)
-    record = extract_record(document_text, classification, input_metadata["tenant_id"],
-                            model, ae_extract_version)
+    try:
+        record = extract_record(document_text, classification, input_metadata["tenant_id"],
+                                model, ae_extract_version)
+    except UnbuiltClassError:
+        raise
+    except NotImplementedError as e:
+        # Don't throw away the common metadata we already extracted — the human
+        # reviewer still gets a pre-filled draft for everything but the record.
+        raise UnbuiltClassError(str(e), common=common) from e
     return common, record
 
 

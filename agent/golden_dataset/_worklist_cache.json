@@ -731,21 +731,21 @@
       },
       "classification": {
         "predicted_class": "Product Quality Complaint",
-        "class_confidence": 0.62,
-        "classification_conflict_margin": 0.07,
-        "classification_rationale": "The document is best classified as a Product Quality Complaint because it reports a physical/environmental integrity concern (heat excursion compromising a sealed product batch), though it competes modestly with Formulation & Excipient Information since the underlying question touches on storage-stability data \u2014 a technical formulation characteristic \u2014 and with On-Label Medical Inquiry since the PI's storage section is referenced.",
+        "class_confidence": 0.72,
+        "classification_conflict_margin": 0.27,
+        "classification_rationale": "The document reports a physical product integrity concern \u2014 a temperature excursion event that may have compromised a sealed bottle of CholoClear-X \u2014 and asks whether the product should be quarantined/discarded, which best fits Product Quality Complaint; it also competes modestly with On-Label Medical Inquiry since the pharmacist references the package insert's storage section and seeks a clinical/stability interpretation.",
         "class_scores": [
           {
             "doc_class": "Product Quality Complaint",
-            "fit_score": 0.62
-          },
-          {
-            "doc_class": "Formulation & Excipient Information",
-            "fit_score": 0.55
+            "fit_score": 0.72
           },
           {
             "doc_class": "On-Label Medical Inquiry",
-            "fit_score": 0.25
+            "fit_score": 0.45
+          },
+          {
+            "doc_class": "Formulation & Excipient Information",
+            "fit_score": 0.15
           },
           {
             "doc_class": "Standard Response Request",
@@ -761,6 +761,10 @@
           },
           {
             "doc_class": "Adverse Event Report",
+            "fit_score": 0.02
+          },
+          {
+            "doc_class": "Out of scope",
             "fit_score": 0.02
           },
           {
@@ -783,7 +787,23 @@
         "has_product_pillar": false,
         "has_event_pillar": false
       },
-      "common": null,
+      "common": {
+        "tenant_id": "TENANT_BIO_99",
+        "case_id": "VAULT_EVAL_013",
+        "document_id": "VAULT_EVAL_013",
+        "source_channel": "Email",
+        "received_date": "2026-06-08",
+        "customer_org": "Cleveland Clinic",
+        "reporter_name": "Priya Nair",
+        "reporter_type": "HCP - Pharmacist",
+        "contact_email": "p.nair@clevelandclinic.org",
+        "contact_phone": "+12165550133",
+        "country_code": "US",
+        "language": "English",
+        "product_mentioned": "CholoClear-X",
+        "active_study_flag": false,
+        "study_id": null
+      },
       "record": null,
       "record_type": null,
       "gates": {
@@ -3662,7 +3682,23 @@
         "has_product_pillar": false,
         "has_event_pillar": false
       },
-      "common": null,
+      "common": {
+        "tenant_id": "TENANT_BIO_99",
+        "case_id": "VAULT_EVAL_031",
+        "document_id": "VAULT_EVAL_031",
+        "source_channel": "Email",
+        "received_date": "2026-06-10",
+        "customer_org": "Westlake Cardiology Associates",
+        "reporter_name": "Daniel Okafor",
+        "reporter_type": "HCP - Physician",
+        "contact_email": "d.okafor@westlakecardio.com",
+        "contact_phone": null,
+        "country_code": "US",
+        "language": "English",
+        "product_mentioned": "CholoClear-X",
+        "active_study_flag": false,
+        "study_id": null
+      },
       "record": null,
       "record_type": null,
       "gates": {
@@ -3723,7 +3759,7 @@
         "predicted_class": "Standard Response Request",
         "class_confidence": 0.95,
         "classification_conflict_margin": 0.75,
-        "classification_rationale": "The MSL explicitly requests the pre-compiled, pre-cleared Standard Response Document (SRD) on CholoClear-X drug interactions \u2014 not new content or a clinical answer \u2014 making this a clear Standard Response Request; On-Label Medical Inquiry scores modestly because drug interactions are an on-label topic, but the explicit SRD ask overrides that framing.",
+        "classification_rationale": "The MSL explicitly requests the pre-compiled, pre-cleared Standard Response Document (SRD) on CholoClear-X drug interactions \u2014 not new content or a clinical answer \u2014 making this a clear Standard Response Request; it scores marginally on On-Label Medical Inquiry only because the underlying topic (drug interactions) is a label-related subject, but the explicit ask is for the SRD itself.",
         "class_scores": [
           {
             "doc_class": "Standard Response Request",
@@ -3777,7 +3813,23 @@
         "has_product_pillar": false,
         "has_event_pillar": false
       },
-      "common": null,
+      "common": {
+        "tenant_id": "TENANT_BIO_99",
+        "case_id": "VAULT_EVAL_032",
+        "document_id": "VAULT_EVAL_032",
+        "source_channel": "Email",
+        "received_date": "2026-06-10",
+        "customer_org": "CardioMed Field Medical",
+        "reporter_name": "Marisol Vega",
+        "reporter_type": "Other",
+        "contact_email": null,
+        "contact_phone": null,
+        "country_code": "null",
+        "language": "English",
+        "product_mentioned": "CholoClear-X",
+        "active_study_flag": false,
+        "study_id": null
+      },
       "record": null,
       "record_type": null,
       "gates": {
@@ -3840,7 +3892,7 @@
         "predicted_class": "Expanded Access / Compassionate Use",
         "class_confidence": 0.97,
         "classification_conflict_margin": 0.92,
-        "classification_rationale": "A licensed physician is urgently requesting compassionate-use/expanded access to CMG-401 (an in-portfolio investigational agent) for a terminally deteriorating patient who has exhausted all approved therapies and is ineligible for clinical trials \u2014 a textbook Expanded Access / Compassionate Use request with no meaningful competition from any other class.",
+        "classification_rationale": "This is a clear Expanded Access / Compassionate Use request: a physician is urgently seeking access to our investigational product CMG-401 for a terminally deteriorating patient who has exhausted all approved therapies and is ineligible for clinical trials \u2014 the defining hallmarks of a compassionate-use/expanded access submission.",
         "class_scores": [
           {
             "doc_class": "Expanded Access / Compassionate Use",
@@ -3894,7 +3946,23 @@
         "has_product_pillar": false,
         "has_event_pillar": false
       },
-      "common": null,
+      "common": {
+        "tenant_id": "TENANT_BIO_99",
+        "case_id": "VAULT_EVAL_033",
+        "document_id": "VAULT_EVAL_033",
+        "source_channel": "Email",
+        "received_date": "2026-06-10",
+        "customer_org": "Mass General",
+        "reporter_name": "Helena Marsh",
+        "reporter_type": "HCP - Physician",
+        "contact_email": null,
+        "contact_phone": null,
+        "country_code": "US",
+        "language": "English",
+        "product_mentioned": "CMG-401",
+        "active_study_flag": false,
+        "study_id": null
+      },
       "record": null,
       "record_type": null,
       "gates": {
@@ -3956,7 +4024,7 @@
         "predicted_class": "Expanded Access / Compassionate Use",
         "class_confidence": 0.95,
         "classification_conflict_margin": 0.85,
-        "classification_rationale": "A licensed physician is explicitly requesting the single-patient IND / named-patient compassionate-use process for CMG-401 (a portfolio product), making this a clear Expanded Access / Compassionate Use inquiry; a minor secondary consideration for Standard Response Request is dismissed because the physician is asking for procedural guidance, not a pre-compiled data packet.",
+        "classification_rationale": "A licensed physician is explicitly requesting the single-patient IND / named-patient compassionate-use process for CMG-401 (a portfolio product) on behalf of a patient, which is a textbook Expanded Access / Compassionate Use inquiry; a minor secondary consideration for Standard Response Request is dismissed because the physician is asking for procedural guidance, not a pre-compiled data packet.",
         "class_scores": [
           {
             "doc_class": "Expanded Access / Compassionate Use",
@@ -4010,7 +4078,23 @@
         "has_product_pillar": false,
         "has_event_pillar": false
       },
-      "common": null,
+      "common": {
+        "tenant_id": "TENANT_BIO_99",
+        "case_id": "VAULT_EVAL_034",
+        "document_id": "VAULT_EVAL_034",
+        "source_channel": "Web Portal",
+        "received_date": "2026-06-10",
+        "customer_org": "Riverside Medical Group",
+        "reporter_name": "Paul Stenger",
+        "reporter_type": "HCP - Physician",
+        "contact_email": null,
+        "contact_phone": null,
+        "country_code": "null",
+        "language": "English",
+        "product_mentioned": "CMG-401",
+        "active_study_flag": false,
+        "study_id": null
+      },
       "record": null,
       "record_type": null,
       "gates": {
@@ -4088,7 +4172,7 @@
           },
           {
             "doc_class": "Expanded Access / Compassionate Use",
-            "fit_score": 0.04
+            "fit_score": 0.05
           },
           {
             "doc_class": "Standard Response Request",
@@ -4126,7 +4210,23 @@
         "has_product_pillar": false,
         "has_event_pillar": false
       },
-      "common": null,
+      "common": {
+        "tenant_id": "TENANT_BIO_99",
+        "case_id": "VAULT_EVAL_035",
+        "document_id": "VAULT_EVAL_035",
+        "source_channel": "Email",
+        "received_date": "2026-06-10",
+        "customer_org": "University of Michigan",
+        "reporter_name": "Ananya Rao",
+        "reporter_type": "HCP - Physician",
+        "contact_email": null,
+        "contact_phone": null,
+        "country_code": "US",
+        "language": "English",
+        "product_mentioned": "CholoClear-X",
+        "active_study_flag": false,
+        "study_id": null
+      },
       "record": null,
       "record_type": null,
       "gates": {
@@ -4187,7 +4287,7 @@
         "predicted_class": "Investigator-Initiated Trial Proposal",
         "class_confidence": 0.97,
         "classification_conflict_margin": 0.92,
-        "classification_rationale": "Dr. Boone is an independent physician proposing a self-designed Phase-IV real-world outcomes study of CholoClear-X (a portfolio product) and explicitly requesting company sponsorship (study drug + research grant), which is the textbook definition of an Investigator-Initiated Trial (IIT) Proposal.",
+        "classification_rationale": "Dr. Boone explicitly proposes an independently designed and run Phase-IV real-world outcomes study of CholoClear-X (a portfolio product), requesting company sponsorship of study drug and a research grant \u2014 a textbook Investigator-Initiated Trial (IIT) proposal submission inquiry.",
         "class_scores": [
           {
             "doc_class": "Investigator-Initiated Trial Proposal",
@@ -4241,7 +4341,23 @@
         "has_product_pillar": false,
         "has_event_pillar": false
       },
-      "common": null,
+      "common": {
+        "tenant_id": "TENANT_BIO_99",
+        "case_id": "VAULT_EVAL_036",
+        "document_id": "VAULT_EVAL_036",
+        "source_channel": "Email",
+        "received_date": "2026-06-10",
+        "customer_org": "Coastal Heart Institute",
+        "reporter_name": "Trevor Boone",
+        "reporter_type": "HCP - Physician",
+        "contact_email": null,
+        "contact_phone": null,
+        "country_code": "US",
+        "language": "English",
+        "product_mentioned": "CholoClear-X",
+        "active_study_flag": false,
+        "study_id": null
+      },
       "record": null,
       "record_type": null,
       "gates": {
@@ -4303,7 +4419,7 @@
         "predicted_class": "Product Quality Complaint",
         "class_confidence": 0.97,
         "classification_conflict_margin": 0.93,
-        "classification_rationale": "The document is a clear Product Quality Complaint \u2014 a pharmacist reports physical defects (cracked and discolored tablets) in a specific lot of CholoClear-X (CCX-2451A), explicitly states no patient has been harmed, and requests a replacement and return instructions; no adverse event, clinical question, or other competing class is present.",
+        "classification_rationale": "This is a clear Product Quality Complaint \u2014 a pharmacist reports physical defects (cracked and discolored tablets) in a specific lot (CCX-2451A) of CholoClear-X 50mg, a portfolio product, with no patient exposure and an explicit request for a replacement and defect report; no adverse event occurred and no clinical question is raised.",
         "class_scores": [
           {
             "doc_class": "Product Quality Complaint",
@@ -4318,6 +4434,10 @@
             "fit_score": 0.03
           },
           {
+            "doc_class": "Public Health / FAQ Deflection",
+            "fit_score": 0.03
+          },
+          {
             "doc_class": "On-Label Medical Inquiry",
             "fit_score": 0.02
           },
@@ -4326,7 +4446,7 @@
             "fit_score": 0.02
           },
           {
-            "doc_class": "Public Health / FAQ Deflection",
+            "doc_class": "Legal / Regulatory Authority Correspondence",
             "fit_score": 0.02
           },
           {
@@ -4342,10 +4462,6 @@
             "fit_score": 0.01
           },
           {
-            "doc_class": "Legal / Regulatory Authority Correspondence",
-            "fit_score": 0.01
-          },
-          {
             "doc_class": "Out of scope",
             "fit_score": 0.01
           }
@@ -4357,7 +4473,23 @@
         "has_product_pillar": false,
         "has_event_pillar": false
       },
-      "common": null,
+      "common": {
+        "tenant_id": "TENANT_BIO_99",
+        "case_id": "VAULT_EVAL_037",
+        "document_id": "VAULT_EVAL_037",
+        "source_channel": "Email",
+        "received_date": "2026-06-10",
+        "customer_org": "Harborview Hospital Pharmacy",
+        "reporter_name": "Grace Lim",
+        "reporter_type": "HCP - Pharmacist",
+        "contact_email": null,
+        "contact_phone": null,
+        "country_code": "US",
+        "language": "English",
+        "product_mentioned": "CholoClear-X 50mg",
+        "active_study_flag": false,
+        "study_id": null
+      },
       "record": null,
       "record_type": null,
       "gates": {
@@ -5198,7 +5330,7 @@
         "predicted_class": "Standard Response Request",
         "class_confidence": 0.78,
         "classification_conflict_margin": 0.06,
-        "classification_rationale": "The physician explicitly requests an SRD or clinical data packet (Standard Response Request, top score) for an off-label use of CholoClear-X (pediatric migraine prophylaxis), making both Standard Response Request and Off-Label Medical Inquiry strong competitors; Standard Response Request edges out because the ask is specifically for a pre-compiled data packet.",
+        "classification_rationale": "The physician explicitly requests an SRD or clinical data packet (Standard Response Request, top score) for an off-label use of CholoClear-X (pediatric migraine prophylaxis), making both Standard Response Request and Off-Label Medical Inquiry strong competitors \u2014 the explicit ask for a pre-compiled data packet edges out the off-label inquiry class.",
         "class_scores": [
           {
             "doc_class": "Standard Response Request",
@@ -5252,7 +5384,23 @@
         "has_product_pillar": false,
         "has_event_pillar": false
       },
-      "common": null,
+      "common": {
+        "tenant_id": "TENANT_BIO_99",
+        "case_id": "VAULT_EVAL_043",
+        "document_id": "VAULT_EVAL_043",
+        "source_channel": "Email",
+        "received_date": "2026-06-10",
+        "customer_org": "Neurology, Portland, OR",
+        "reporter_name": "Owen Br###",
+        "reporter_type": "HCP - Physician",
+        "contact_email": null,
+        "contact_phone": null,
+        "country_code": "US",
+        "language": "English",
+        "product_mentioned": "CholoClear-X",
+        "active_study_flag": false,
+        "study_id": null
+      },
       "record": null,
       "record_type": null,
       "gates": {

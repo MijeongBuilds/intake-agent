@@ -87,11 +87,23 @@
     }
   },
   "VAULT_EVAL_013": {
-    "key": "97e9c09449be68846c36a4ef9937e04c",
+    "key": "61caf57123594b9226c71c28f1700eec",
     "grounding": {
+      "Reporter Type": {
+        "evidence": "Priya Nair, PharmD",
+        "reason": "PharmD credential identifies the reporter as a pharmacist (HCP)"
+      },
+      "Country": {
+        "evidence": "Cleveland Clinic",
+        "reason": "Cleveland Clinic is a well-known US institution, supporting a US country classification"
+      },
+      "Language": {
+        "evidence": "Dear Medical Affairs,",
+        "reason": "Message body is written in English"
+      },
       "Classification": {
         "evidence": "storage-stability question regarding your commercial lipid-lowering tablet",
-        "reason": "The inquiry concerns potential product degradation due to a temperature excursion, which is a product quality concern, not a complaint about adverse effects\u2026"
+        "reason": "Inquiry concerns potential product quality impact from a temperature excursion, indicating a product quality complaint"
       }
     }
   },
@@ -453,62 +465,146 @@
     }
   },
   "VAULT_EVAL_031": {
-    "key": "0336d676ed29713937249de9d195630f",
+    "key": "dfe8e436e158fa783a32922fd16cbd37",
     "grounding": {
+      "Reporter Type": {
+        "evidence": "Daniel Okafor, MD",
+        "reason": "MD designation identifies the reporter as a physician/HCP"
+      },
+      "Country": {
+        "evidence": "Austin, TX",
+        "reason": "Texas is a US state, confirming the country is US"
+      },
+      "Language": {
+        "evidence": "Could you please send me your Standard Response Document or approved information packet covering the adult dosing and administration of CholoClear-X?",
+        "reason": "The email is written entirely in English"
+      },
       "Classification": {
-        "evidence": "just the standard pre-cleared letter your team circulates",
-        "reason": "Requester explicitly asks for a standard pre-cleared letter, not a tailored reply, confirming a Standard Response Request classification"
+        "evidence": "send me your Standard Response Document or approved information packet",
+        "reason": "Requester explicitly asks for a standard pre-cleared response document, matching a Standard Response Request classification"
       }
     }
   },
   "VAULT_EVAL_032": {
-    "key": "cd7e854188a495022dd97f0597c39160",
+    "key": "8a814ae3b679f2d34f6cf15029ec6590",
     "grounding": {
+      "Reporter Type": {
+        "evidence": "Marisol Vega, MSL\nCardioMed Field Medical",
+        "reason": "Sender is an MSL (Medical Science Liaison) on a field team, not a standard reporter category like HCP or patient, so 'Other' is assigned; however, MSL/field\u2026"
+      },
+      "Country": {
+        "evidence": "",
+        "reason": "No country is mentioned anywhere in the source document"
+      },
+      "Language": {
+        "evidence": "Hi MI team,",
+        "reason": "The entire document is written in English"
+      },
       "Classification": {
         "evidence": "just the standard SRD",
-        "reason": "Requester explicitly asks only for the standard SRD, confirming this is a Standard Response Request"
+        "reason": "Sender explicitly requests a Standard Response Document (SRD), confirming a Standard Response Request classification"
       }
     }
   },
   "VAULT_EVAL_033": {
-    "key": "237241afc32bc9e9f8455a94e893b046",
+    "key": "e9390b28b0901d07d53480bb92b557d0",
     "grounding": {
+      "Reporter Type": {
+        "evidence": "Dr. Helena Marsh, MD",
+        "reason": "MD credential identifies reporter as a physician/HCP"
+      },
+      "Country": {
+        "evidence": "Mass General, Boston, MA",
+        "reason": "Boston, MA is a US location, confirming US country"
+      },
+      "Language": {
+        "evidence": "Dear CardioMed Medical Affairs,",
+        "reason": "Document is written in English"
+      },
       "Classification": {
-        "evidence": "request compassionate-use access to your investigational agent CMG-401 under an expanded access arrangement",
-        "reason": "Email explicitly requests both compassionate-use access and an expanded access arrangement"
+        "evidence": "compassionate-use access to your investigational agent CMG-401 under an expanded access arrangement",
+        "reason": "Explicitly requests compassionate use and expanded access"
       }
     }
   },
   "VAULT_EVAL_034": {
-    "key": "ef4627b59a7c6bc37bbae823f4156a8c",
+    "key": "efe53506f9552e45680ac29eec9a2fe6",
     "grounding": {
+      "Reporter Type": {
+        "evidence": "Dr. Paul Stenger, MD",
+        "reason": "Sender identifies as a medical doctor (MD), confirming HCP-Physician status"
+      },
+      "Country": {
+        "evidence": "",
+        "reason": "No country is mentioned anywhere in the source document"
+      },
+      "Language": {
+        "evidence": "To whom it may concern,",
+        "reason": "The entire document is written in English"
+      },
       "Classification": {
         "evidence": "single-patient IND / named-patient process for obtaining it on a compassionate-use basis",
-        "reason": "The inquiry explicitly references compassionate-use and expanded access (single-patient IND/named-patient) processes"
+        "reason": "Sender explicitly requests information about compassionate-use / expanded access procedures"
       }
     }
   },
   "VAULT_EVAL_035": {
-    "key": "4429078140ff5b64a5abb7c2bd28b9ea",
+    "key": "5648b10fed311e353f765d22cdf49643",
     "grounding": {
+      "Reporter Type": {
+        "evidence": "Prof. Ananya Rao, MD PhD",
+        "reason": "MD PhD credentials identify the reporter as a physician/HCP"
+      },
+      "Country": {
+        "evidence": "University of Michigan",
+        "reason": "University of Michigan is a US-based institution, indicating US country"
+      },
+      "Language": {
+        "evidence": "Dear CardioMed Scientific Affairs,",
+        "reason": "The document is written in English"
+      },
       "Classification": {
-        "evidence": "investigator-initiated study",
-        "reason": "Source explicitly describes the proposal as an investigator-initiated study, matching the classification value."
+        "evidence": "propose an investigator-initiated study",
+        "reason": "Explicitly describes an investigator-initiated trial proposal"
       }
     }
   },
   "VAULT_EVAL_036": {
-    "key": "875e55dd24db38b79f8b88df73080dda",
+    "key": "601187bfa706c36ded3226ca5df767ce",
     "grounding": {
+      "Reporter Type": {
+        "evidence": "Dr. Trevor Boone, MD",
+        "reason": "MD credential identifies the reporter as a physician/HCP"
+      },
+      "Country": {
+        "evidence": "San Diego, CA",
+        "reason": "San Diego, CA is a US city, indicating the country is US"
+      },
+      "Language": {
+        "evidence": "Hello,\n\nI'd like to submit a concept for a Phase-IV real-world outcomes study",
+        "reason": "The email is written entirely in English"
+      },
       "Classification": {
-        "evidence": "How do I formally submit an IIT proposal for review?",
-        "reason": "Sender explicitly asks about submitting an IIT (Investigator-Initiated Trial) proposal, confirming this classification."
+        "evidence": "formally submit an IIT proposal for review",
+        "reason": "IIT (Investigator-Initiated Trial) proposal directly matches the classification"
       }
     }
   },
   "VAULT_EVAL_037": {
-    "key": "57ff32f88292edc1817041933f5172af",
+    "key": "a6eb765b5816da8083da9963a2b25215",
     "grounding": {
+      "Reporter Type": {
+        "evidence": "Grace Lim, RPh",
+        "reason": "RPh (Registered Pharmacist) designation identifies reporter as a pharmacist HCP"
+      },
+      "Country": {
+        "evidence": "Seattle, WA",
+        "reason": "Seattle, WA is a US city/state, confirming US country"
+      },
+      "Language": {
+        "evidence": "CardioMed Quality / Medical Info,",
+        "reason": "The entire source document is written in English"
+      },
       "Classification": {
         "evidence": "roughly a third of the tablets are visibly cracked and several are discolored (brownish spotting)",
         "reason": "Visible physical defects (cracking, discoloration) in the product constitute a product quality complaint"
@@ -605,11 +701,23 @@
     }
   },
   "VAULT_EVAL_043": {
-    "key": "42524df4bcad81ae9090eb42834c6eb5",
+    "key": "2bbf5128398cb74b98659ea727d73c4f",
     "grounding": {
+      "Reporter Type": {
+        "evidence": "Dr. Owen Br###, MD\nNeurology, Portland, OR",
+        "reason": "MD credential and specialty indicate a licensed physician HCP"
+      },
+      "Country": {
+        "evidence": "Portland, OR",
+        "reason": "Portland, OR is a city/state in the United States"
+      },
+      "Language": {
+        "evidence": "Do you have an SRD or clinical data packet on using CholoClear-X for pediatric migraine prophylaxis?",
+        "reason": "The entire message is written in English"
+      },
       "Classification": {
-        "evidence": "Do you have an SRD or clinical data packet",
-        "reason": "Requesting an SRD or clinical data packet is a standard medical information request, supporting classification as a Standard Response Request"
+        "evidence": "Do you have an SRD or clinical data packet on using CholoClear-X for pediatric migraine prophylaxis?",
+        "reason": "Requestor is asking for standard medical/clinical documentation (SRD or data packet)"
       }
     }
   },
