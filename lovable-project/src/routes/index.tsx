@@ -121,6 +121,7 @@ function Worklist() {
                   <th className="px-6 py-4 w-40">Case ID</th>
                   <th className="px-4 py-4">Source</th>
                   <th className="px-4 py-4">Product</th>
+                  <th className="px-4 py-4">AI Classification</th>
                   <th className="px-4 py-4">
                     <button onClick={() => setOldestFirst((v) => !v)} className="flex items-center gap-1 uppercase tracking-wider hover:text-reg-blue">
                       {timingHeader} <span className="text-[9px]">{oldestFirst ? "▲" : "▼"}</span>
@@ -137,6 +138,16 @@ function Worklist() {
                     <td className="px-6 py-4 font-mono font-medium text-reg-accent">#{c.id}</td>
                     <td className="px-4 py-4 text-slate-600">{c.source}</td>
                     <td className="px-4 py-4 font-semibold">{c.product}</td>
+                    <td className="px-4 py-4">
+                      {c.predictedClass ? (
+                        <div className="flex flex-col gap-0.5">
+                          <span className="text-[12.5px] text-reg-blue">{c.predictedClass}</span>
+                          <span className="text-[10px] text-slate-400 font-mono">AI proposed{c.classConfidence != null ? ` · ${c.classConfidence}%` : ""}</span>
+                        </div>
+                      ) : (
+                        <span className="text-slate-400 text-[12px]">— (halted before classification)</span>
+                      )}
+                    </td>
                     <td className="px-4 py-4">
                       {queue === "PV" && c.dueLabel ? (
                         <div className="flex flex-col gap-0.5">
@@ -164,7 +175,7 @@ function Worklist() {
                   </tr>
                 ))}
                 {cases.length === 0 && (
-                  <tr><td colSpan={7} className="px-6 py-10 text-center text-slate-400 text-sm">No cases in this view.</td></tr>
+                  <tr><td colSpan={8} className="px-6 py-10 text-center text-slate-400 text-sm">No cases in this view.</td></tr>
                 )}
               </tbody>
             </table>

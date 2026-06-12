@@ -115,7 +115,14 @@ function ReviewCase() {
               {/* CLASSIFICATION — the core output, editable */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase">Classification {c.classNeedsReview && <span className="text-reg-warning">· confirm</span>}</label>
+                  <span className="flex items-center gap-2">
+                    <label className="text-[10px] font-bold text-slate-400 uppercase">Classification {c.classNeedsReview && <span className="text-reg-warning">· confirm</span>}</label>
+                    {classChanged ? (
+                      <span className="px-2 py-0.5 rounded text-[9px] font-black tracking-wide bg-blue-50 text-reg-accent border border-blue-200">REVIEWER OVERRIDE</span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded text-[9px] font-black tracking-wide bg-amber-50 text-amber-700 border border-amber-200">AI PROPOSED</span>
+                    )}
+                  </span>
                   {c.classConfidence != null && <span className="text-[10px] font-mono text-slate-400">{c.classConfidence}% confident</span>}
                 </div>
                 <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)}
@@ -205,6 +212,16 @@ function ReviewCase() {
                 <span className="text-[10px] font-mono text-slate-400">21 CFR 11.10(a)</span>
               </div>
               <p className="text-xs text-slate-500 mb-4">Re-enter your password to sign and create this record as <b>{reviewer.id}</b>. An immutable audit entry will be generated.</p>
+              {selectedClass && (
+                <div className="mb-4 rounded-md bg-slate-50 border border-reg-border px-3 py-2">
+                  <p className="text-[10px] font-bold text-slate-400 uppercase mb-0.5">Classification being confirmed</p>
+                  <p className="text-xs text-slate-700"><b>{selectedClass}</b>{" "}
+                    {classChanged
+                      ? <span className="text-reg-accent font-semibold">· reviewer override (AI proposed: {c.predictedClass})</span>
+                      : <span className="text-slate-400">· as proposed by the AI{c.classConfidence != null ? ` (${c.classConfidence}%)` : ""}</span>}
+                  </p>
+                </div>
+              )}
               {unresolved.length > 0 && (
                 <div className="mb-4 rounded-md bg-amber-50 border border-amber-200 px-3 py-2">
                   <p className="text-[11px] font-bold text-amber-800">⚠️ {unresolved.length} field{unresolved.length === 1 ? "" : "s"} still need attention</p>
